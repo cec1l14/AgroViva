@@ -57,9 +57,10 @@
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(165, 195, 42, 0.8);
+    background-color: rgba(165, 195, 42, 0.7);
     height: 255px;
-    width: 850px;
+    width: 900px;
+    border-radius: 8px;
     
   }
 
@@ -88,5 +89,21 @@
 }
 
 .p-footer {
+    padding: 40px 0px 0px 0px;
     text-align: center;
+    font-size: 15px;
+    color:#363636;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #e0dcdc;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #a4d041;
+    border-radius: 8px;
 }
