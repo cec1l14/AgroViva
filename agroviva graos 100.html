@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroViva - Grãos</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.pinimg.com/736x/22/df/96/22df963feda81c17ab6b077736cee2f4.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            
+        }
+        header {
+            background-color: #10df3d;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-bar {
+            order: -1;
+        }
+        .search-bar input {
+            padding: 5px;
+            width: 200px;
+        }
+        nav {
+            font-size: 14px;
+        }
+        main {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .text-section {
+            flex: 1;
+            text-align: center;
+            padding-right: 20px; 
+            padding: 20px;
+           
+        }
+        .subtitle {
+            color: rgb(3, 3, 3);
+            font-size: 14px;
+            text-align: center;
+        }
+        .classification {
+           
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+          
+            
+        }
+        .classification h2 {
+            border: 2px solid black;
+            display: inline-block;
+            padding: 5px;
+            border-radius: 15px;
+            width: 200px;
+            text-align: center;
+           
+        }
+        .classification form {
+            display: flex;
+            flex-direction: column;
+        }
+        .classification label {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+        .products {
+            flex: 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            gap: 1cm;
+        }
+        .product {
+           
+            padding: 10px;
+            text-align: center;
+            width: 200px;
+            border-radius: 10px;
+        }
+        .product img {
+            width: 200px;
+            height: auto;
+            border: 5px solid #367c45;
+        }
+        .brand {
+            color: black;
+            font-weight: bold;
+        }
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar...">
+        </div>
+        <nav>
+            <a href="#">Produtos</a> / <span>Grãos</span>
+        </nav>
+    </header>
+    <main>
+        <div class="text-section">
+            <h1>GRÃOS</h1>
+            <p class="subtitle">Colhidos na hora</p>
+            <section class="classification">
+                <h2>Classificação</h2>
+                <form>
+                    <label>
+                        <input type="checkbox" name="classification" value="organico"> Produto orgânico (5)
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="classification" value="local"> Cultivado localmente (4)
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="classification" value="proteinas"> Fonte de proteínas (2)
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="classification" value="sopas"> Ideal para sopas (5)
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="classification" value="durabilidade"> Alta durabilidade (4)
+                    </label>
+                </form>
+            </section>
+        </div>
+        <section class="products">
+            <div class="product">
+                <img src="imagens graos agroviva jpg/cafe.png" alt="Café">
+                <div class="brand">AgroViva</div>
+                <div class="name">Café</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/feijao.png" alt="Feijão">
+                <div class="brand">AgroViva</div>
+                <div class="name">Feijão</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/bico2.png" alt="Grão de Bico">
+                <div class="brand">AgroViva</div>
+                <div class="name">Grão de Bico</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/arroz.png" alt="Arroz">
+                <div class="brand">AgroViva</div>
+                <div class="name">Arroz</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/gg.png" alt="Gergelim">
+                <div class="brand">AgroViva</div>
+                <div class="name">Gergelim</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/chia.png" alt="Chia">
+                <div class="brand">AgroViva</div>
+                <div class="name">Chia</div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
