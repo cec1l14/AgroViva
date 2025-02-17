@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroViva - VERDURAS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.pinimg.com/736x/22/df/96/22df963feda81c17ab6b077736cee2f4.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            
+        }
+        header {
+            background-color: #10df3d;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-bar {
+            order: -1;
+        }
+        .search-bar input {
+            padding: 5px;
+            width: 200px;
+        }
+        nav {
+            font-size: 14px;
+        }
+        main {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .text-section {
+            flex: 1;
+            text-align: center;
+            padding-right: 20px; 
+            padding: 20px;
+           
+        }
+        .subtitle {
+            color: rgb(3, 3, 3);
+            font-size: 14px;
+            text-align: center;
+        }
+        .classification {
+           
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+          
+            
+        }
+        .classification h2 {
+            border: 2px solid black;
+            display: inline-block;
+            padding: 5px;
+            border-radius: 15px;
+            width: 200px;
+            text-align: center;
+           
+        }
+        .classification form {
+            display: flex;
+            flex-direction: column;
+        }
+        .classification label {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+        .products {
+            flex: 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            gap: 1cm;
+        }
+        .product {
+           
+            padding: 10px;
+            text-align: center;
+            width: 200px;
+            border-radius: 10px;
+        }
+        .product img {
+            width: 200px;
+            height: auto;
+            border: 5px solid #367c45;
+        }
+        .brand {
+            color: black;
+            font-weight: bold;
+        }
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar...">
+        </div>
+        <nav>
+            <a href="#">Produtos</a> / <span>verduras</span>
+        </nav>
+    </header>
+    <main>
+        <div class="text-section">
+            <h1>GRÃOS</h1>
+            <p class="subtitle">Colhidos na hora</p>
+            <section class="classification">
+                <h2>Classificação</h2>
+                <form>
+                    <label>
+                        <input type="checkbox" name="classification" value="organico"> Produto orgânico (5)
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="classification" value="local"> Cultivado localmente (4)
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="classification" value="cru"> pode ser consumido cru (2)
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="classification" value="saladas"> Ideal para saladas (5)
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="classification" value="durabilidade"> curta durabilidade (4)
+                    </label>
+                </form>
+            </section>
+        </div>
+        <section class="products">
+            <div class="product">
+                <img src="imagens graos agroviva jpg/pimentao.png" alt="pimentão">
+                <div class="brand">AgroViva</div>
+                <div class="name">Pimentão</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/alho.png" alt="alho">
+                <div class="brand">AgroViva</div>
+                <div class="name">Alho</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/cebola2.png" alt="cebola">
+                <div class="brand">AgroViva</div>
+                <div class="name">cebola</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/cenoura.png" alt="cenoura">
+                <div class="brand">AgroViva</div>
+                <div class="name">Cenoura</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/tomate.png" alt="tomate">
+                <div class="brand">AgroViva</div>
+                <div class="name">Tomate</div>
+            </div>
+            <div class="product">
+                <img src="imagens graos agroviva jpg/batata.png" alt="batata">
+                <div class="brand">AgroViva</div>
+                <div class="name">Batata</div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
