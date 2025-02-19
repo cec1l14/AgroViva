@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroViva</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Biblioteca Boxicons -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap'); /* Fonte Inter */
+       
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3800px;
+            height: 108px;
+            background-color: #e0dcdc;
+        }
+        .corner-box {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 108px;
+            height: 108px;
+            background-color: #a5c32a;
+        }
+        .menu {
+            position: absolute;
+            top: 39.9px;
+            left: 2250.8px;
+            width: 656.5px;
+            height: 28.2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu a {
+            text-decoration: none;
+            color: black;
+            font-size: 30px;
+            transition: transform 0.2s;
+        }
+        .menu a:hover {
+            transform: scale(1.1);
+        }
+        .menu .active {
+            color: #a5c32a;
+        }
+        .bottom-box {
+            position: absolute;
+            top: 648.8px;
+            left: 0;
+            width: 100vw;
+            height: 1300px;
+            background-color: #a5c32a;
+        }
+        .product-title {
+            position: absolute;
+            left: 250.8px;
+            top: 500.6px;
+            width: 615.9px;
+            height: 86.3px;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            font-size: 80px;
+            color: black;
+        }
+        .decorative-box {
+            position: absolute;
+            left: 600.4px;
+            top: 470.3px;
+            width: 25.3px;
+            height: 26.6px;
+            background-color: #617509;
+        }
+        /* Estilo para a imagem */
+        .image-container {
+            position: absolute;
+            right: 110px;
+            top: 200.2px;
+            width: 1700px;
+            height: 1700px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 43px;
+        }
+       
+        /* Círculos verdes */
+        .green-circle, .green-circle2, .green-circle3 {
+            position: absolute;
+            width: 200.1px;
+            height: 200.1px;
+            background-color: #617509;
+            border-radius: 50%;
+            left: 241.2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Garantir que a imagem dentro do círculo não ultrapasse os limites */
+            z-index: 2; /* Ajuste para garantir que o círculo verde fique por baixo da imagem */
+        }
+        .green-circle { top: 900.6px; }
+        .green-circle2 { top: 1500.6px; }
+        .green-circle3 { top: 1200.6px; }
+
+
+        .category-text {
+            position: absolute;
+            width: 233.6px;
+            height: 29.9px;
+            font-family: 'Canva Sans', sans-serif;
+            font-weight: bold;
+            font-size: 50px;
+            color: #617509;
+            left: 480px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .category-text:hover {
+            transform: scale(1.1);
+        }
+        .category-text:active {
+            transform: scale(1.2);
+        }
+
+
+        .text-frutas { top: 970.6px; }
+        .text-verduras { top: 1570.6px; }
+        .text-graos { top: 1270.6px; }
+
+
+       
+        .icon-fruta, .icon-verdura, .icon-grao {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+    <div class="corner-box"></div>
+    <nav class="menu">
+        <a href="#">Home</a>
+        <a href="#" class="active">Produto</a>
+        <a href="#">Sobre nós</a>
+        <a href="#">Login</a>
+        <a href="#">Cadastro</a>
+    </nav>
+    <div class="decorative-box"></div>
+    <div class="product-title">Produtos</div>
+    <div class="green-circle">
+        <img src="icons8-abacaxi-50.png" alt="Ícone de Fruta" class="icon-fruta">
+    </div>
+    <div class="image-container">
+        <img src="fruit.jfif" alt="frutas">
+    </div>
+    <div class="bottom-box"></div>
+
+
+    <div class="green-circle2">
+       
+        <img src="icons8-cenoura-50.png" alt="Ícone de Verdura" class="icon-verdura">
+    </div>
+   
+   
+    <div class="green-circle3">
+        <img src="icons8-grãos-de-café-50.png" alt="Ícone de Grão" class="icon-grao">
+    </div>
+
+
+    <div class="category-text text-frutas">Frutas</div>
+    <div class="category-text text-verduras">Verduras</div>
+    <div class="category-text text-graos">Grãos</div>
+
+
+</body>
+</html>
