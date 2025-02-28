@@ -35,7 +35,7 @@
             right: 0;
             width: 108px;
             height: 108px;
-            background-color: #a5c32a;
+            background-color: #a4d041;
         }
         .menu {
             position: absolute;
@@ -57,7 +57,7 @@
             transform: scale(1.1);
         }
         .menu .active {
-            color: #a5c32a;
+            color: #a4d041;
         }
         .bottom-box {
             position: absolute;
@@ -65,7 +65,7 @@
             left: 0;
             width: 100vw;
             height: 1300px;
-            background-color: #a5c32a;
+            background-color: #a4d041;
         }
         .product-title {
             position: absolute;
@@ -134,13 +134,19 @@
             cursor: pointer;
             transition: transform 0.2s ease-in-out;
         }
+        .category-text a {
+          text-decoration: none; 
+         color: inherit; 
+        display: block; 
+         width: 100%;
+         height: 100%;
+        }
         .category-text:hover {
             transform: scale(1.1);
         }
         .category-text:active {
             transform: scale(1.2);
         }
-
 
         .text-frutas { top: 970.6px; }
         .text-verduras { top: 1570.6px; }
@@ -193,6 +199,17 @@
     <div class="category-text text-verduras">Verduras</div>
     <div class="category-text text-graos">Grãos</div>
 
-
+    <div class="category-text text-frutas">
+        <a href="frutas.html">Frutas</a>
+    </div>
+    
+    <div class="category-text text-verduras">
+        <a href="Verduras.html">Verduras</a>
+    </div>
+    
+    <div class="category-text text-graos">
+        <a href="graos.html">Grãos</a>
+    </div>
+    
 </body>
 </html>
