@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroViva</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Biblioteca Boxicons -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap'); /* Fonte Inter */
+       
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3800px;
+            height: 108px;
+            background-color: #e0dcdc;
+        }
+        .corner-box {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 108px;
+            height: 108px;
+            background-color: #a4d041;
+        }
+        .menu {
+            position: absolute;
+            top: 39.9px;
+            left: 2550.8px;
+            width: 656.5px;
+            height: 28.2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu a {
+            text-decoration: none;
+            color: black;
+            font-size: 30px;
+        }
+        .menu .active {
+            color: #a5c32a;
+        }
+        .menu .produtos-verduras {
+            position: relative;
+            cursor: default;
+            font-size: 35px;
+        }
+        .menu .produtos-verduras .produto {
+            color: #a5c32a;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .menu .produtos-verduras .produto:hover {
+            transform: scale(1.1);
+        }
+        .bottom-box {
+            position: absolute;
+            top: 648.8px;
+            left: 0;
+            width: 100vw;
+            height: 1300px;
+            background-color: #a4d041;
+        }
+        #divBusca {
+            background-color:#e0dcdc;
+            border:solid 1px;
+            border-radius:15px;
+            width: 386.6px;
+            height: 38.7px;
+            position: absolute;
+            top: 39.9px;
+            left: 49.3px;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+        #txtBusca {
+            flex-grow: 1;
+            background-color: transparent;
+            padding-left: 5px;
+            font-style: italic;
+            font-size: 25px;
+            border: none;
+            height: 100%;
+            width: 100%;
+            outline: none;
+        }
+        #btnBusca {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+   
+        .Verduras-label {
+            position: absolute;
+            top: 310.6px;
+            left: 160.3px;
+            width: 410.1px;
+            height: 85.6px;
+            color: #a5c32a;
+            font-size: 100px;
+            font-weight: bold;
+        }
+
+        .decoracao {
+            position: absolute;
+            left: 605.4px;
+            top: 310.3px;
+            width: 25.3px;
+            height: 26.6px;
+            background-color: #a5c32a;
+        }
+       
+        .visualizacao-label {
+            position: absolute;
+            top: 396px;
+            left: 115.3px;
+            width: 478.7px;
+            height: 127.4px;
+            font-size: 40px;
+            font-weight: arial;
+            text-align: center;
+            line-height: 127.4px;
+        }
+
+        /* Estilo para a seção de classificação */
+        .classificacao-container {
+            position: absolute;
+            top: 550px;
+            left: 150px;
+            width: 350px;
+            height: 60px;
+            border: 2px solid #000;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .classificacao-container .titulo {
+            font-size: 40px;
+            color: black;
+        }
+
+        .classificacao-container .seta {
+            font-size: 30px;
+            color: black;
+            transition: transform 0.3s;
+        }
+
+        .classificacao-container .seta:hover {
+            transform: scale(1.2); /* Aumentando a escala da seta ao passar o mouse */
+        }
+
+        .classificacoes {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+            width: 550px;
+            position: absolute;
+            top: 650px;
+            left: 140px;
+        }
+
+        .classificacoes p {
+            margin: 20px 0;
+            font-size: 40px;
+            color: black;
+        }
+
+        .classificacao-container.active .seta {
+            transform: rotate(180deg); /* Roda a seta para baixo */
+        }
+
+        .classificacao-container.active + .classificacoes {
+            display: block;
+        }
+
+        .classificacao-container:hover .seta,
+        .classificacoes p:hover {
+            cursor: pointer;
+        }
+
+        /* Estilo da imagem da uva */
+        .imagem-pimen {
+            position: absolute;
+            top: 500.6px;
+            left: 1000.4px;
+            width: 350.8px;
+            height: 300.8px;
+            border: 7px solid #303f09;
+        }
+        .imagem-batata{
+            position: absolute;
+            top: 500.6px;
+            left: 1700.4px;
+            width: 350.8px;
+            height: 300.8px;
+            border: 7px solid #303f09;
+        }
+        .imagem-cebola{
+            position: absolute;
+            top: 500.6px;
+            left: 2400.4px;
+            width: 350.8px;
+            height: 300.8px;
+            border: 7px solid #303f09;
+        }
+        .imagem-cenoura {
+            position: absolute;
+            top: 1100.6px;
+            left: 1000.4px;
+            width: 350.8px;
+            height: 300.8px;
+            border: 7px solid #303f09;
+        }
+        .imagem-tomate {
+            position: absolute;
+            top: 1100.6px;
+            left: 1700.4px;
+            width: 350.8px;
+            height: 300.8px;
+            border: 7px solid #303f09;
+        }
+        .imagem-alho {
+            position: absolute;
+            top: 1100.6px;
+            left: 2400.4px;
+            width: 350.8px;
+            height: 300.8px;
+            border: 7px solid #303f09;
+        }
+
+        /* Novo estilo para o texto Agroviva */
+        .agroviva-text {
+            position: absolute;
+            top: 830px;
+            left: 1000.4px;
+            font-size: 35px;
+            color: #a5c32a;
+            font-weight: bold;
+        }
+
+        .agroviva-text2 {
+            position: absolute;
+            top: 830px; 
+            left: 1700.4px; 
+            font-size: 35px;
+            color: #a5c32a;
+            font-weight: bold;
+        }
+
+        .agroviva-text3 {
+            position: absolute;
+            top: 830px;
+            left: 2400.4px;
+            font-size: 35px;
+            color: #a5c32a;
+            font-weight: bold;
+        }
+
+        .agroviva-text4 {
+            position: absolute;
+            top: 1430px;
+            left: 1000.4px;
+            font-size: 35px;
+            color: #a5c32a;
+            font-weight: bold;
+        }
+        .agroviva-text5 {
+            position: absolute;
+            top: 1430px;
+            left: 1700.4px;
+            font-size: 35px;
+            color: #a5c32a;
+            font-weight: bold;
+        }
+        .agroviva-text6 {
+            position: absolute;
+            top: 1430px;
+            left: 2400.4px;
+            font-size: 35px;
+            color: #a5c32a;
+            font-weight: bold;
+        }
+        .pimentao-text {
+            position: absolute;
+            top: 890px;
+            left: 1000.4px;
+            font-size: 35px;
+            color:black;
+            font-weight: bold;
+        } 
+        .batata-text {
+            position: absolute;
+            top: 890px;
+            left: 1700.4px;
+            font-size: 35px;
+            color:black;
+            font-weight: bold;
+        } 
+        .cebola-text {
+            position: absolute;
+            top: 890px;
+            left: 2400.4px;
+            font-size: 35px;
+            color:black;
+            font-weight: bold;
+        }
+        .cenoura-text {
+            position: absolute;
+            top: 1490px;
+            left: 1000.4px;
+            font-size: 35px;
+            color:black;
+            font-weight: bold;
+        }
+        .tomate-text {
+            position: absolute;
+            top: 1490px;
+            left: 1700.4px;
+            font-size: 35px;
+            color:black;
+            font-weight: bold;
+        }
+        .alho-text {
+            position: absolute;
+            top: 1490px;
+            left: 2400.4px;
+            font-size: 35px;
+            color:black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+    <div class="corner-box"></div>
+    <nav class="menu">
+        <div class="produtos-verduras">
+            <span class="produto">Produtos</span>/<span>Verduras</span>
+        </div>
+    </nav>
+    <div id="divBusca">
+        <input type="text" id="txtBusca" placeholder="Buscar..."/>
+        <img src="lupa.png" id="btnBusca" alt="Buscar"/>
+    </div>
+    <div class="decoracao"></div>
+    <div class="Verduras-label">Verduras</div>
+    <div class="visualizacao-label">Apenas visualização</div>
+
+    <!-- Texto "Agroviva" -->
+    <div class="agroviva-text">Agroviva</div>
+    <div class="agroviva-text2">Agroviva</div>
+    <div class="agroviva-text3">Agroviva</div>
+    <div class="agroviva-text4">Agroviva</div>
+    <div class="agroviva-text5">AgroViva</div>
+    <div class="agroviva-text6">AgroViva</div>
+
+    <!-- Texto Frutas -->
+     <div class="pimentao-text">Pimentão</div>
+     <div class="batata-text">Batata</div>
+     <div class="cebola-text">Cebola</div>
+     <div class="cenoura-text">Cenoura</div>
+     <div class="tomate-text">Tomate</div> 
+     <div class="alho-text">Alho</div>
+    <!-- Seção de classificação -->
+    <div class="classificacao-container">
+        <span class="titulo">Classificação</span>
+        <span class="seta">&#x2191;</span>
+    </div>
+    <div class="classificacoes">
+        <p>Produto orgânico (5)</p>
+        <p>Cultivado Localmente (4)</p>
+        <p>Curta duração (2)</p>
+        <p>Ideal para salada (5)</p>
+        <p>Pode ser consumido cru (4)</p>
+    </div>
+
+    <div class="imagem-pimen">
+        <img src="pimentão.jpeg" alt="Pimentão" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div class="imagem-batata">
+        <img src="batatinha.jpeg" alt="Batata" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div class="imagem-cebola">
+        <img src="cebola.jpeg" alt="Cebola" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div class="imagem-cenoura">
+        <img src="cenourinha.jpeg" alt="Cenoura" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div class="imagem-tomate">
+        <img src="tomate.jpeg" alt="Tomate" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div class="imagem-alho">
+        <img src="alho.jpeg" alt="Alho" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <script>
+        // Script para alternar a visibilidade das classificações e mudar a direção da seta
+        const classificacaoContainer = document.querySelector('.classificacao-container');
+        const classificacoes = document.querySelector('.classificacoes');
+
+        classificacaoContainer.addEventListener('click', () => {
+            classificacaoContainer.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
