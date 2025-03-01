@@ -63,8 +63,9 @@ body {
   justify-content: space-between;
   margin: -15px 0 15px;
   color: #617509;
-  font-size: 15px;
-  gap:10px
+  font-size: 22px;
+  gap:10px;
+  flex-direction: column;
 }
 .senhas label {
   display: flex;
@@ -72,8 +73,10 @@ body {
 }
 .senhas label input[type=checkbox] {
   justify-content: space-between;
+  width: 70%;
+  height: 30px;
   accent-color: #b8c074;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 .senhas a{
   text-decoration: none;
@@ -84,15 +87,16 @@ body {
 }
 
 .login {
+  justify-content: space-between;
   width: 100%;
-  height: 60px;
+  height: 50px;
   background-color: #b8c074;
   border-radius: 50px;
   border: none;
   cursor: pointer;
   font-size: 30px;
   color: #617509;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 30px;
   align-items: center;
 }
