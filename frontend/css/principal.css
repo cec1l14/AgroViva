@@ -1,0 +1,65 @@
+/* página home */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-image: url('pexels-pixabay-259280.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  text-align: center;
+}
+
+.caixa {
+  background-color: rgba(164, 208, 65, 0.7); 
+  padding: 40px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 800px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 0 auto; 
+}
+
+.h1-home {
+  font-size: 4em !important;
+  font-weight: bold !important;
+  color: white !important;
+}
+
+@media (max-width: 768px) {
+  .caixa-transparente {
+    padding: 20px;
+  }
+
+  .h1 {
+    font-size: 8vw;
+  }
+}
+
+/* rolagem */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e0dcdc;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a4d041;
+  border-radius: 8px;
+}
