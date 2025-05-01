@@ -9,7 +9,7 @@
 
 .body-home {
   min-height: 100vh;
-  background-image: url('pexels-pixabay-259280.jpg');
+  background-image: url(../imagens/pexels-pixabay-259280.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -71,7 +71,7 @@
     display: flex;
     justify-content: center;
     align-items: center ;
-    background: url(plantassaum.jpg);
+    background: url(../imagens/plantassaum.jpg);
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -170,7 +170,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url(plantassaum.jpg);
+    background: url(../imagens/plantassaum.jpg);
     background-size: cover;
     background-position: center;
     min-height: 100vh;
