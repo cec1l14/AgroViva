@@ -1,9 +1,10 @@
 /* página home */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 .body-home {
@@ -63,3 +64,202 @@
   background-color: #a4d041;
   border-radius: 8px;
 }
+
+/* página login */
+
+.body-login {
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    background: url(plantassaum.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    width: 420px;
+    background-color: #d9d9d9;
+    border: 2px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 10px);
+  }
+  .container h1{
+    font-size: 36px;
+    text-align: center;
+    color: #a5c32a;
+    font-weight: bold;
+  }
+  .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+  .input-box input {
+    width: 100%;
+    height: 100%;
+    background-color: #b2b6a8;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #617509;
+    padding: 20px 45px 20px 20px;
+  }
+  .input-box input::placeholder {
+    color:#617509;
+  }
+  .input-box i{
+    position: absolute;
+    right: 20px;
+    font-size: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color:#617509;
+  }
+
+  .senhas{
+    display: flex;
+    justify-content: space-between;
+    margin: -15px 0 15px;
+    color: #617509;
+    font-size: 15px;
+  }
+  .senhas label input {
+    accent-color: #b8c074;
+    margin-right: 5px;
+  }
+  .senhas a{
+    text-decoration: none;
+    color: #617509;
+  }
+  .senhas a:hover {
+    text-decoration: underline;
+  }
+
+  .login {
+    width: 100%;
+    height: 50px;
+    background-color: #b8c074;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #617509;
+    font-weight: 600;
+  }
+  .login:hover{
+    background-color: #a5c32a;
+    border: 2px solid;
+    transition: 0.25ms;
+  }
+
+.senhas label input[type=checkbox] {
+  width: 25px;
+  height: 30px;
+  accent-color: #b8c074;
+  margin-right: 12px;
+}
+
+/* página cadastro */
+
+
+.body-cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(plantassaum.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+  
+  .container-cadastro {
+    width: 520px;
+    background-color: #d9d9d9;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .container-cadastro h1 {
+    font-size: 46px;
+    text-align: center;
+    color: #a5c32a;
+    font-weight: bold;
+  }
+  
+  .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+  
+  .input-box input {
+    width: 100%;
+    height: 100%;
+    background-color: #b2b6a8;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #617509;
+    padding: 20px 45px 20px 20px;
+  }
+  
+  .input-box input::placeholder {
+    color: #617509;
+  }
+  
+  .input-box i {
+    position: absolute;
+    right: 20px;
+    font-size: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #617509;
+  }
+  
+  .senhas-cadastro {
+    display: flex;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    color: #617509;
+    font-size: 16px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .senhas-cadastro label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .senhas-cadastro input[type=checkbox] {
+    width: 25px;
+    height: 30px;
+    accent-color: #b8c074;
+    margin-right: 12px;
+  }
+  
+  .login {
+    width: 100%;
+    height: 50px;
+    background-color: #b8c074;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #617509;
+    font-weight: 600;
+  }
+  
+  .login:hover {
+    background-color: #a5c32a;
+    border: 2px solid;
+    transition: 0.25ms;
+  }
