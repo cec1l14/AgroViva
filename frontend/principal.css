@@ -65,6 +65,30 @@
   border-radius: 8px;
 }
 
+/* configuração-navbar */
+
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  min-height: 70px;
+  background-color: #e0dcdc;  
+}
+
+.navbar-nav {
+  margin-left: 10px;
+}
+
+.navbar a.active,
+.navbar a:hover {
+  color: #a5c32a;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #363636;
+  transition: color 0.2s;
+}
+
 /* página login */
 
 .body-login {
@@ -177,7 +201,7 @@
   }
   
   .container-cadastro {
-    width: 520px;
+    width: 420px;
     background-color: #d9d9d9;
     border-radius: 12px;
     padding: 30px 40px;
