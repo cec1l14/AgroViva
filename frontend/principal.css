@@ -101,7 +101,7 @@
     min-height: 100vh;
   }
 
-  .container {
+  .container-l {
     width: 420px;
     background-color: #d9d9d9;
     border: 2px solid #d9d9d9;
@@ -109,7 +109,7 @@
     padding: 30px 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 10px);
   }
-  .container h1{
+  .container-l h1{
     font-size: 36px;
     text-align: center;
     color: #a5c32a;
@@ -289,4 +289,28 @@
   }
 
   /* página produtos*/
+
+  .container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px;
+    width: 200px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .card img{
+      max-width: 100%;
+      border-radius: 8px;
+      width: 300px;
+  }
+  .card h3{
+    margin-top: 8px;
+  }
+  
   
