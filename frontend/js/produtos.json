@@ -1,11 +1,13 @@
 [
   {
     "nome": "Abacaxi",
+    "tipo": "Fruta",
     "imagem": "../imagens/abacaxi.jpg"
   },
 
   {
     "nome": "Alho",
+    "tipo": "Legume",
     "imagem": "../imagens/alho.jpeg"
   },
 
