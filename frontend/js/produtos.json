@@ -2,12 +2,14 @@
   {
     "nome": "Abacaxi",
     "tipo": "Fruta",
+    "contato": null,
     "imagem": "../imagens/abacaxi.jpg"
   },
 
   {
     "nome": "Alho",
     "tipo": "Legume",
+    "contato": null,
     "imagem": "../imagens/alho.jpeg"
   },
 
