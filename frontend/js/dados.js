@@ -7,27 +7,27 @@ export const produtos = [
     {
       nome: "Alho",
       tipo: "Legume",
-      imagem: "../imagens/alho.jpeg"
+      imagem: "../imagens/alho.jpg"
     },
     {
       nome: "Arroz",
       tipo: "Grão",
-      imagem: "../imagens/arroz.jpeg"
+      imagem: "../imagens/arrozin.jpg"
     },
     {
       nome: "Banana",
       tipo: "Fruta",
-      imagem: "../imagens/bananinha.jpg"
+      imagem: "../imagens/bananas.jpg"
     },
     {
       nome: "Batata",
       tipo: "Legume",
-      imagem: "../imagens/batatinha.jpeg"
+      imagem: "../imagens/batata.jpg"
     },
     {
       nome: "Café",
       tipo: "Grão",
-      imagem: "../imagens/café.jpeg"
+      imagem: "../imagens/graocafe.jpg"
     },
     {
       nome: "Caju",
@@ -37,42 +37,42 @@ export const produtos = [
     {
       nome: "Cebola",
       tipo: "Legume",
-      imagem: "../imagens/cebola.jpeg"
+      imagem: "../imagens/cebolas.jpg"
     },
     {
       nome: "Cenoura",
       tipo: "Legume",
-      imagem: "../imagens/cenourinha.jpeg"
+      imagem: "../imagens/cenoura.jpg"
     },
     {
       nome: "Chia",
       tipo: "Grão",
-      imagem: "../imagens/chia.jpeg"
+      imagem: "../imagens/chia.jpg"
     },
     {
       nome: "Feijão",
       tipo: "Legume",
-      imagem: "../imagens/feijão.jpeg"
+      imagem: "../imagens/feijao.jpg"
     },
     {
       nome: "Gergelim",
       tipo: "Grão",
-      imagem: "../imagens/gergelim.jpeg"
+      imagem: "../imagens/gergelim.jpg"
     },
     {
       nome: "Grão de Bico",
       tipo: "Legume",
-      imagem: "../imagens/grao de bico.jpeg"
+      imagem: "../imagens/graodebico.jpg"
     },
     {
       nome: "Laranja",
       tipo: "Fruta",
-      imagem: "../imagens/laranja.jpeg"
+      imagem: "../imagens/laranja.jpg"
     },
     {
       nome: "Limão",
       tipo: "Fruta",
-      imagem: "../imagens/limão.jpg"
+      imagem: "../imagens/limoes.jpg"
     },
     {
       nome: "Maçã",
@@ -82,11 +82,11 @@ export const produtos = [
     {
       nome: "Pimentão",
       tipo: "Legume",
-      imagem: "../imagens/pimentão.jpeg"
+      imagem: "../imagens/pimentao.jpg"
     },
     {
       nome: "Tomate",
       tipo: "Legume",
-      imagem: "../imagens/tomate.jpeg"
+      imagem: "../imagens/tomate.jpg"
     }
   ];  
