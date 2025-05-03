@@ -34,19 +34,9 @@
 }
 
 .h1-home {
-  font-size: 4em !important;
+  font-size: 4em !important; 
   font-weight: bold !important;
   color: white !important;
-}
-
-@media (max-width: 768px) {
-  .caixa-transparente {
-    padding: 20px;
-  }
-
-  .h1 {
-    font-size: 8vw;
-  }
 }
 
 /* rolagem */
