@@ -312,4 +312,14 @@
     color: #2f2f2f
   }
   
+  .delete-icon {
+    position: absolute;
+    font-size: 20px;
+    bottom: 20px;
+    right: 17px;
+    color: #a5c32a;
+    cursor: pointer;
+  }
+  
+  
   
