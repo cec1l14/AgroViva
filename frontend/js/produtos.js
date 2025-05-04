@@ -1,4 +1,4 @@
-import { produtos } from './dados.js';
+import { produtos } from './data/dados.js';
 
 const container = document.getElementById("produtos-container");
 const botoesFiltro = document.querySelectorAll('.filtro');
