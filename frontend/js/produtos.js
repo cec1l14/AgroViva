@@ -33,7 +33,6 @@ function renderizarProdutos(lista) {
 }
 
 
-
 function filtrarProdutos(categoria) {
   const filtrados = produtos.filter(produto => produto.tipo === categoria);
   renderizarProdutos(filtrados);
