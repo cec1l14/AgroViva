@@ -1,0 +1,399 @@
+/* página home */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.body-home {
+  min-height: 100vh;
+  background-image: url(../imagens/pexels-pixabay-259280.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  text-align: center;
+}
+
+.caixa {
+  background-color: rgba(164, 208, 65, 0.7); 
+  padding: 40px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 800px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 0 auto; 
+}
+
+.h1-home {
+  font-size: 4em !important; 
+  font-weight: bold !important;
+  color: white !important;
+}
+
+/* rolagem */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e0dcdc;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a4d041;
+  border-radius: 8px;
+}
+
+/* configuração-navbar */
+
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  min-height: 70px;
+  background-color: #e0dcdc;  
+}
+
+.navbar-nav {
+  margin-left: 10px;
+}
+
+.navbar a.active,
+.navbar a:hover {
+  color: #a5c32a;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #363636;
+  transition: color 0.2s;
+}
+
+/* página login */
+
+.body-login {
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    background: url(../imagens/plantassaum.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+
+  .container-l {
+    width: 420px;
+    background-color: #d9d9d9;
+    border: 2px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 10px);
+  }
+  .container-l h1{
+    font-size: 36px;
+    text-align: center;
+    color: #a5c32a;
+    font-weight: bold;
+  }
+  .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+  .input-box input {
+    width: 100%;
+    height: 100%;
+    background-color: #b2b6a8;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #617509;
+    padding: 20px 45px 20px 20px;
+  }
+  .input-box input::placeholder {
+    color:#617509;
+  }
+  .input-box i{
+    position: absolute;
+    right: 20px;
+    font-size: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color:#617509;
+  }
+
+  .senhas{
+    display: flex;
+    justify-content: space-between;
+    margin: -15px 0 15px;
+    color: #617509;
+    font-size: 15px;
+  }
+  .senhas label input {
+    accent-color: #b8c074;
+    margin-right: 5px;
+  }
+  .senhas a{
+    text-decoration: none;
+    color: #617509;
+  }
+  .senhas a:hover {
+    text-decoration: underline;
+  }
+
+  .login {
+    width: 100%;
+    height: 50px;
+    background-color: #b8c074;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #617509;
+    font-weight: 600;
+  }
+  .login:hover{
+    background-color: #a5c32a;
+    border: 2px solid;
+    transition: 0.25ms;
+  }
+
+.senhas label input[type=checkbox] {
+  width: 25px;
+  height: 30px;
+  accent-color: #b8c074;
+  margin-right: 12px;
+}
+
+/* página cadastro */
+
+
+.body-cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(../imagens/plantassaum.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+  
+  .container-cadastro {
+    width: 420px;
+    background-color: #d9d9d9;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .container-cadastro h1 {
+    font-size: 46px;
+    text-align: center;
+    color: #a5c32a;
+    font-weight: bold;
+  }
+  
+  .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+  
+  .input-box input {
+    width: 100%;
+    height: 100%;
+    background-color: #b2b6a8;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #617509;
+    padding: 20px 45px 20px 20px;
+  }
+  
+  .input-box input::placeholder {
+    color: #617509;
+  }
+  
+  .input-box i {
+    position: absolute;
+    right: 20px;
+    font-size: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #617509;
+  }
+  
+  .senhas-cadastro {
+    display: flex;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    color: #617509;
+    font-size: 16px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .senhas-cadastro label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .senhas-cadastro input[type=checkbox] {
+    width: 25px;
+    height: 30px;
+    accent-color: #b8c074;
+    margin-right: 12px;
+  }
+  
+  .login {
+    width: 100%;
+    height: 50px;
+    background-color: #b8c074;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #617509;
+    font-weight: 600;
+  }
+  
+  .login:hover {
+    background-color: #a5c32a;
+    border: 2px solid;
+    transition: 0.25ms;
+  }
+
+  /* página produtos*/
+
+  .container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-left: 100px;
+  }
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 20px;
+    width: 18rem;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .card img{
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto 10px auto;
+      
+  }
+  .body-produtos{
+    background-color:#CFE0BC;
+    font-family: Arial, sans-serif;
+    color: #2f2f2f
+  }
+  
+  .filtro-wrapper {
+    position: absolute;
+    top: 100px;
+    left: 40px;
+    width: 250px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .filtro-toggle {
+    display: none;
+  }
+  .filtro-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 12px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #2f2f2f;
+  }
+  
+  .filtro-label::after {
+    content: "▼";
+    font-size: 16px;
+    transition: transform 0.3s;
+  }
+  
+  .filtro-toggle:checked + .filtro-label::after {
+    transform: rotate(180deg);
+  }
+  
+  .opcoes-filtro {
+    display: none;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 10px 15px;
+  }
+  
+  .filtro-toggle:checked + .filtro-label + .opcoes-filtro {
+    display: block;
+  }
+  
+  .opcoes-filtro p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #2f2f2f;
+    cursor: pointer;
+  }
+  
+  .opcoes-filtro p:hover {
+    background-color: #CFE0BC;
+    border-radius: 6px;
+    padding: 2px 5px;
+  }
+
+  .delete-icon {
+    font-size: 15px; 
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    color: #a5c32a; 
+    cursor: pointer;
+  }
+
+  .botao-mais {
+    font-size: 100px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    bottom: 20px;
+    right: 100px;
+    transition: background-color 0.3s ease;
+  }
+
+  
