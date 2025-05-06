@@ -328,12 +328,13 @@
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 12px;
+    border: 2px solid #fff;
+    border-radius: 12px 12px 0 0;
     padding: 10px 15px;
     cursor: pointer;
     font-size: 20px;
     color: #2f2f2f;
+    margin-bottom: 0%;
   }
   
   .filtro-label::after {
@@ -347,9 +348,10 @@
   }
   
   .opcoes-filtro {
+    margin-top: -2px;
     display: none;
     background-color: #fff;
-    border: 2px solid #000;
+    border: 2px solid #fff;
     border-top: none;
     border-radius: 0 0 12px 12px;
     padding: 10px 15px;
