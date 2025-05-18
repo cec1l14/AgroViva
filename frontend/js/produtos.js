@@ -35,18 +35,18 @@ function renderizarProdutos(lista) {
 }
 
 
-function filtrarProdutos(categoria) {
-  const filtrados = produtos.filter(produto => produto.tipo === categoria);
+function filtrarProdutos(tipo) {
+  const filtrados = produtos.filter(produto => produto.tipo === tipo);
   renderizarProdutos(filtrados);
 }
 
 botoesFiltro.forEach(botao => {
   botao.addEventListener('click', () => {
-    const categoria = botao.dataset.categoria;
-    if (categoria === "Todos") {
+    const tipo = botao.dataset.tipo;
+    if (tipo === "Todos") {
       renderizarProdutos(produtos);
     } else {
-      filtrarProdutos(categoria);
+      filtrarProdutos(tipo);
     }
   });
 });
