@@ -70,8 +70,9 @@
 
 .navbar a.active,
 .navbar a:hover {
-  color: #a5c32a;
+  color: #a5c32a !important;
 }
+
 
 .navbar a {
   text-decoration: none;
