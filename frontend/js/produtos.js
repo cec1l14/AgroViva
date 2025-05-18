@@ -9,6 +9,7 @@ function renderizarProdutos(lista) {
   lista.forEach(produto => {
     const cardProd = `
       <div class="card" id="produto-${produto.nome}">
+        <h6 class= "produto-disponivel"> Produto disponível </h6> 
         <img src="${produto.imagem}" class="card-img" alt="${produto.nome}">
         <div class="card-body">
           <span class="fa-solid fa-trash delete-icon"></span>
