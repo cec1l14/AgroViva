@@ -14,6 +14,7 @@ function renderizarProdutos(lista) {
         <div class="card-body">
           <span class="fa-solid fa-trash delete-icon"></span>
           <h5 class="card-title">${produto.nome}</h5>
+          <i class="bx bxs-user"></i>
           <p class="card-title">${produto.tipo}</p>
         </div>
       </div>

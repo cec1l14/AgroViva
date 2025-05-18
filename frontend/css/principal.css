@@ -305,8 +305,8 @@
       border-radius: 8px;
       display: block;
       margin: 0 auto 10px auto;
-      
   }
+  
   .body-produtos{
     background-color:#CFE0BC;
     font-family: Arial, sans-serif;
@@ -375,6 +375,15 @@
     padding: 2px 5px;
   }
 
+  .card-body i{
+    font-size: 20px; 
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #a5c32a; 
+    cursor: pointer;
+  }
+  
   .delete-icon {
     font-size: 15px; 
     position: absolute;
