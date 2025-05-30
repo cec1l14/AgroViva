@@ -1,5 +1,3 @@
-import { produtos } from './data/dados.js';
-
 const container = document.getElementById("produtos-container");
 const botoesFiltro = document.querySelectorAll('.filtro');
 
@@ -50,6 +48,9 @@ botoesFiltro.forEach(botao => {
     }
   });
 });
+
+const response = await fetch('/produtos');
+const produtos = await response.json();
 
 // Renderiza todos inicialmente
 renderizarProdutos(produtos);
