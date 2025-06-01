@@ -1,18 +1,32 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { produtos } from './data/dados.js';
- 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 
-app.use(express.static('public'));
- 
+// carregando os arquivos de public
+
+app.use(express.static(path.join(__dirname, '../public')));
+app.use('/imagens', express.static('../../imagens'));
+
+
+// rota para home.html
 app.get('/', (req, res) => {
-  return res.send('Hello World!');
+  res.sendFile(path.join(__dirname, '../public/home.html'));
 });
 
+// rota para carregar os produtos
+
 app.get('/produtos', (req, res) => {
-  return res.json(produtos);
+  res.json(produtos);
 });
- 
-app.listen(3000, () => {
-  console.log('App running on port 3000');
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+

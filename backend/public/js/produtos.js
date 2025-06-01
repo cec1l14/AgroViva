@@ -1,13 +1,15 @@
 const container = document.getElementById("produtos-container");
 const botoesFiltro = document.querySelectorAll('.filtro');
 
+let produtos = []; 
+
 function renderizarProdutos(lista) {
   container.innerHTML = ''; // Limpa o conteúdo antes de renderizar
 
   lista.forEach(produto => {
     const cardProd = `
       <div class="card" id="produto-${produto.nome}">
-        <h6 class= "produto-disponivel"> Produto disponível </h6> 
+        <h6 class="produto-disponivel"> Produto disponível </h6> 
         <img src="${produto.imagem}" class="card-img" alt="${produto.nome}">
         <div class="card-body">
           <span class="fa-solid fa-trash delete-icon"></span>
@@ -20,11 +22,8 @@ function renderizarProdutos(lista) {
 
     container.insertAdjacentHTML("beforeend", cardProd);
 
-    // Agora adiciona o evento de deletar
-    const trashIcon = container.querySelector(
-      `#produto-${produto.nome} .delete-icon`
-    );
-
+    // Adiciona evento de deletar
+    const trashIcon = container.querySelector(`#produto-${produto.nome} .delete-icon`);
     trashIcon.onclick = function () {
       const cardToRemove = document.querySelector(`#produto-${produto.nome}`);
       cardToRemove.remove();
@@ -32,27 +31,34 @@ function renderizarProdutos(lista) {
   });
 }
 
-
 function filtrarProdutos(tipo) {
-  const filtrados = produtos.filter(produto => produto.tipo === tipo);
-  renderizarProdutos(filtrados);
+  if (tipo === "Todos") {
+    renderizarProdutos(produtos);
+  } else {
+    const filtrados = produtos.filter(produto => produto.tipo === tipo);
+    renderizarProdutos(filtrados);
+  }
 }
 
-botoesFiltro.forEach(botao => {
-  botao.addEventListener('click', () => {
-    const tipo = botao.dataset.tipo;
-    if (tipo === "Todos") {
-      renderizarProdutos(produtos);
-    } else {
-      filtrarProdutos(tipo);
-    }
-  });
-});
+// Função async para carregar produtos 
 
-const response = await fetch('/produtos');
-const produtos = await response.json();
+async function carregarProdutos() {
+  try {
+    const response = await fetch('/produtos'); 
+    produtos = await response.json();
 
-// Renderiza todos inicialmente
-renderizarProdutos(produtos);
+    renderizarProdutos(produtos);
 
+    botoesFiltro.forEach(botao => {
+      botao.addEventListener('click', () => {
+        const tipo = botao.dataset.tipo;
+        filtrarProdutos(tipo);
+      });
+    });
 
+  } catch (error) {
+    console.error('Erro ao carregar produtos:', error);
+  }
+}
+
+carregarProdutos();
