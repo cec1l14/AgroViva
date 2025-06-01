@@ -90,3 +90,5 @@ export const produtos = [
       imagem: "../imagens/tomate.jpg"
     }
   ];  
+
+  export default produtos;
