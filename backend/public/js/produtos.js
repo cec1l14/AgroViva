@@ -8,7 +8,7 @@ function renderizarProdutos(lista) {
 
   lista.forEach(produto => {
     const cardProd = `
-      <div class="card" id="produto-${produto.nome}">
+      <div class="card" id="produto-${produto.nome.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}">
         <h6 class="produto-disponivel">Produto disponível</h6> 
         <img src="${produto.imagem}" class="card-img" alt="${produto.nome}">
         <div class="card-body">
@@ -19,15 +19,8 @@ function renderizarProdutos(lista) {
         </div>
       </div>
     `;
-
+    
     container.insertAdjacentHTML("beforeend", cardProd);
-
-    // Evento de deletar produto
-    const trashIcon = container.querySelector(`#produto-${produto.nome} .delete-icon`);
-    trashIcon.onclick = function () {
-      const cardToRemove = document.querySelector(`#produto-${produto.nome}`);
-      cardToRemove.remove();
-    };
   });
 }
 
@@ -50,7 +43,6 @@ async function carregarProdutos() {
   }
 }
 
-
 function configurarFiltros() {
   botoesFiltro.forEach(botao => {
     botao.addEventListener('click', () => {
@@ -60,6 +52,13 @@ function configurarFiltros() {
   });
 }
 
+// Delegação de evento para deletar produto
+container.addEventListener('click', function (event) {
+  if (event.target.classList.contains('delete-icon')) {
+    const card = event.target.closest('.card');
+    if (card) card.remove();
+  }
+});
 
 carregarProdutos();
 configurarFiltros();
