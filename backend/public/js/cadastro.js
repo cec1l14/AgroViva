@@ -1,18 +1,17 @@
-// Pega o formulário
 const form = document.querySelector('form');
 
 form.addEventListener('submit', async (event) => {
-  event.preventDefault(); // evita reload da página
+  event.preventDefault(); 
 
   // Pega os valores dos inputs pelo id
   const nome = document.getElementById('nome').value.trim();
   const email = document.getElementById('email').value.trim();
   const senha = document.getElementById('senha').value.trim();
 
-  // Monta o objeto para enviar
+
   const data = { nome, email, senha };
 
-  console.log('Dados enviados:', data); // <-- aqui o console.log
+  console.log('Dados enviados:', data);
 
   try {
     const response = await fetch('/cadastro', {
@@ -24,7 +23,7 @@ form.addEventListener('submit', async (event) => {
     const resData = await response.json();
 
     if (response.ok) {
-      alert(resData.message); // cadastro OK
+      alert(resData.message);
       form.reset(); // limpa form
     } else {
       alert('Erro: ' + resData.error);
