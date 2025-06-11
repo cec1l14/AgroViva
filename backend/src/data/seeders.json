@@ -1,0 +1,115 @@
+
+{
+  "produtos": [
+{
+      "nome": "Abacaxi",
+      "tipo": "Fruta",
+      "imagem": "../imagens/abacaxi.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Alho",
+      "tipo": "Legume",
+      "imagem": "../imagens/alho.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Arroz",
+      "tipo": "Grão",
+      "imagem": "../imagens/arrozin.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Banana",
+      "tipo": "Fruta",
+      "imagem": "../imagens/bananas.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Batata",
+      "tipo": "Legume",
+      "imagem": "../imagens/batata.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Café",
+      "tipo": "Grão",
+      "imagem": "../imagens/graocafe.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Caju",
+      "tipo": "Fruta",
+      "imagem": "../imagens/caju.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Cebola",
+      "tipo": "Legume",
+      "imagem": "../imagens/cebolas.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Cenoura",
+      "tipo": "Legume",
+      "imagem": "../imagens/cenoura.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Chia",
+      "tipo": "Grão",
+      "imagem": "../imagens/chia.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Feijão",
+      "tipo": "Legume",
+      "imagem": "../imagens/feijao.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Gergelim",
+      "tipo": "Grão",
+      "imagem": "../imagens/gergelim.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Grão de Bico",
+      "tipo": "Legume",
+      "imagem": "../imagens/graodebico.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Laranja",
+      "tipo": "Fruta",
+      "imagem": "../imagens/laranja.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Limão",
+      "tipo": "Fruta",
+      "imagem": "../imagens/limoes.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Maçã",
+      "tipo": "Fruta",
+      "imagem": "../imagens/maça.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Pimentão",
+      "tipo": "Legume",
+      "imagem": "../imagens/pimentao.jpg",
+      "id": ""
+    },
+    {
+      "nome": "Tomate",
+      "tipo": "Legume",
+      "imagem": "../imagens/tomate.jpg",
+      "id": ""
+    }
+  ]
+}
+   
+  

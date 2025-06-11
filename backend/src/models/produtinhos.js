@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 import { produtos } from '../data/data.js';
  
-function create({ name, value }) {
+function create({ nome, tipo}) {
   const id = uuidv4();
  
-  const produtos = { name, value, id };
+  const produtos = { nome, tipo, id };
  
-  if (name && value) {
+  if (nome && tipo) {
     produtos.push(produtos);
  
     return produtos;
@@ -15,10 +15,10 @@ function create({ name, value }) {
   }
 }
  
-function read(field, value) {
-  if (field && value) {
+function read(nome, tipo) {
+  if (nome && tipo) {
     const filteredprodutos = produtos.filter((produtos) =>
-      produtos[field].includes(value)
+      produtos[nome].includes(tipo)
     );
  
     return filteredprodutos;
@@ -41,9 +41,9 @@ function readById(id) {
   }
 }
  
-function update({ id, name, value }) {
-  if (name && value && id) {
-    const newprodutos = { name, value, id };
+function update({ id, nome, tipo }) {
+  if (nome && tipo && id) {
+    const newprodutos = { nome, tipo, id };
  
     const index = produtos.findIndex((produtos) => produtos.id === id);
  
