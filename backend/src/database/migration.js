@@ -5,9 +5,11 @@ async function up() {
  
   const investmentsSql = `
     CREATE TABLE produtos (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name VARCHAR(50) NOT NULL,
-      value INTEGER NOT NULL
+        cod_produto integer PRIMARY KEY, AUTOINCREMENT
+  validade DATE,
+  preco FLOAT,
+  descricao VARCHAR(40));
+
     )
   `;
  
