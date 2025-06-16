@@ -1,5 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
-import { produtos } from '../data/data.js';
+import { produtos } from '../database/data.js';
  
 function create({ nome, tipo}) {
   const id = uuidv4();
