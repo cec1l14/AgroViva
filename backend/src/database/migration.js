@@ -3,7 +3,7 @@ import Database from './database.js';
 async function up() {
   const db = await Database.connect();
  
-  const investmentsSql = `
+  const produtosSql = `
     CREATE TABLE produtos (
         cod_produto integer PRIMARY KEY, AUTOINCREMENT
   validade DATE,
@@ -13,7 +13,7 @@ async function up() {
     )
   `;
  
-  await db.run(investmentsSql);
+  await db.run(produtosSql);
 }
  
 export default { up };
