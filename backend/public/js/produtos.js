@@ -35,7 +35,8 @@ function filtrarProdutos(tipo) {
 
 async function carregarProdutos() {
   try {
-    const response = await fetch('/produtos'); 
+    const response = await fetch('/api/produtos'); 
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     produtos = await response.json();
     renderizarProdutos(produtos); 
   } catch (error) {

@@ -2,4 +2,4 @@
 
 ###
 
-GET {{host}}/produtos
+GET {{host}}/api/produtos

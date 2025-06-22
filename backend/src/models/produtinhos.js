@@ -1,74 +1,18 @@
-import { produtos } from '../database/database.js';
- 
-function create({ nome, tipo}) {
-  const id = uuidv4();
- 
-  const produtos = { nome, tipo, id };
- 
-  if (nome && tipo) {
-    produtos.push(produtos);
- 
-    return produtos;
-  } else {
-    throw new Error('Unable to create produtos');
-  }
+import Database from '../database/database.js';
+
+async function create({ nome, tipo, imagem }) {
+  const db = await Database.connect();
+  const result = await db.run(
+    'INSERT INTO produtos (nome, tipo, imagem) VALUES (?, ?, ?)',
+    [nome, tipo, imagem]
+  );
+  return { id: result.lastID, nome, tipo, imagem };
 }
- 
-function read(nome, tipo) {
-  if (nome && tipo) {
-    const filteredprodutos = produtos.filter((produtos) =>
-      produtos[nome].includes(tipo)
-    );
- 
-    return filteredprodutos;
-  }
- 
+
+async function read() {
+  const db = await Database.connect();
+  const produtos = await db.all('SELECT * FROM produtos');
   return produtos;
 }
- 
-function readById(id) {
-  if (id) {
-    const index = produtos.findIndex((produtos) => produtos.id === id);
- 
-    if (!produtos[index]) {
-      throw new Error('produtos not found');
-    }
- 
-    return produtos[index];
-  } else {
-    throw new Error('Unable to find produtos');
-  }
-}
- 
-function update({ id, nome, tipo }) {
-  if (nome && tipo && id) {
-    const newprodutos = { nome, tipo, id };
- 
-    const index = produtos.findIndex((produtos) => produtos.id === id);
- 
-    if (!produtos[index]) {
-      throw new Error('produtos not found');
-    }
- 
-    produtos[index] = newprodutos;
- 
-    return newprodutos;
-  } else {
-    throw new Error('Unable to update produtos');
-  }
-}
- 
-function remove(id) {
-  if (id) {
-    const index = produtos.findIndex((produtos) => produtos.id === id);
- 
-    produtos.splice(index, 1);
- 
-    return true;
-  } else {
-    throw new Error('produtos not found');
-  }
-}
- 
-export default { create, read, readById, update, remove };
- 
+
+export default { create, read };
