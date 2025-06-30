@@ -21,4 +21,4 @@ async function readB() {
   const produtor = await db.all ('select * from produtor');
   return produtor;
 }
-export default { create, read };
+export default { create, read, readB };
