@@ -1,5 +1,6 @@
 import Database from '../database/database.js';
 
+
 async function create({ nome, tipo, imagem }) {
   const db = await Database.connect();
   const result = await db.run(
@@ -15,4 +16,9 @@ async function read() {
   return produtos;
 }
 
+async function readB() {
+  const db = await database.connect();
+  const produtor = await db.all ('select * from produtor');
+  return produtor;
+}
 export default { create, read };
