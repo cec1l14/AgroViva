@@ -131,9 +131,11 @@
     right: 20px;
     font-size: 20px;
     top: 50%;
+    cursor: pointer;
     transform: translateY(-50%);
     color:#617509;
   }
+  
 
   .senhas{
     display: flex;
