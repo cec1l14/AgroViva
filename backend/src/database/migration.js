@@ -22,6 +22,7 @@ async function up() {
     );
   `;
   await db.run(produtosSql);
+  await db.run (produtorSql);
 }
 
 export default { up };

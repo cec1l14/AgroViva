@@ -1,7 +1,7 @@
 
 {
   "produtos": [
-{
+    {
       "nome": "Abacaxi",
       "tipo": "Fruta",
       "imagem": "../imagens/abacaxi.jpg",
@@ -108,8 +108,25 @@
       "tipo": "Legume",
       "imagem": "../imagens/tomate.jpg",
       "id": ""
+    
     }
+    
   ]
+ {
+  "produtor":[
+
+    {
+    "email":,
+    "telefone":"",
+    "senha": "",
+    "cpf": ""
+    }
+    
+    
+  ]
+  
+  }
+
 }
    
   
