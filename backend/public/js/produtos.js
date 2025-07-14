@@ -7,19 +7,25 @@ function renderizarProdutos(lista) {
   container.innerHTML = ''; // Limpa o conteúdo antes de renderizar
 
   lista.forEach(produto => {
+    // Verifica se os campos necessários existem
+    if (!produto || !produto.descricao) {
+      console.warn("Produto inválido:", produto);
+      return;
+    }
+
     const cardProd = `
-      <div class="card" id="produto-${produto.nome.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}">
+      <div class="card" id="produto-${produto.descricao.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}">
         <h6 class="produto-disponivel">Produto disponível</h6> 
-        <img src="${produto.imagem}" class="card-img" alt="${produto.nome}">
+        <img src="${produto.imagem || 'https://via.placeholder.com/150'}" class="card-img" alt="${produto.descricao}">
         <div class="card-body">
           <span class="fa-solid fa-trash delete-icon"></span>
-          <h5 class="card-title">${produto.nome}</h5>
+          <h5 class="card-title">${produto.descricao}</h5>
           <i class="bx bxs-user"></i>
-          <p class="card-title">${produto.tipo}</p>
+          <p class="card-title">${produto.tipo || 'Sem tipo'}</p>
         </div>
       </div>
     `;
-    
+
     container.insertAdjacentHTML("beforeend", cardProd);
   });
 }
@@ -38,6 +44,7 @@ async function carregarProdutos() {
     const response = await fetch('/api/produtos'); 
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     produtos = await response.json();
+    console.log("Produtos recebidos:", produtos); // Verificação no console (IMPORTANTE!!)
     renderizarProdutos(produtos); 
   } catch (error) {
     console.error('Erro ao carregar produtos:', error);

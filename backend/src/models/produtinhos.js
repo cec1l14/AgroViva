@@ -17,7 +17,7 @@ async function read() {
 }
 
 async function readB() {
-  const db = await database.connect();
+  const db = await Database.connect();
   const produtor = await db.all ('select * from produtor');
   return produtor;
 }

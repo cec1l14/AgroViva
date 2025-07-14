@@ -20,6 +20,8 @@ async function up() {
       validade DATE,
       preco FLOAT,
       descricao VARCHAR(40),
+      imagem VARCHAR(255),
+      tipo VARCHAR(40),
       cod_produtor INTEGER NOT NULL,
       FOREIGN KEY (cod_produtor) REFERENCES produtor(cod_produtor)
     );
@@ -27,7 +29,6 @@ async function up() {
 
   await db.run(produtorSql);
   await db.run(produtosSql);
-
 }
 
-up();
+export default { up };
