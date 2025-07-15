@@ -24,11 +24,11 @@ async function read() {
   return produtos;
 }
 
-async function readProdutores() {
+async function readB() {
   const db = await Database.connect();
   const produtores = await db.all('SELECT * FROM produtor');
   return produtores;
 }
 
-export default { create, read, readProdutores };
+export default { create, read, readB };
 
