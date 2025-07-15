@@ -1,13 +1,21 @@
 import Database from '../database/database.js';
 
-
-async function create({ nome, tipo, imagem }) {
+async function create({ descricao, tipo, imagem, validade, preco, cod_produtor }) {
   const db = await Database.connect();
   const result = await db.run(
-    'INSERT INTO produtos (nome, tipo, imagem) VALUES (?, ?, ?)',
-    [nome, tipo, imagem]
+    `INSERT INTO produtos (descricao, tipo, imagem, validade, preco, cod_produtor) 
+     VALUES (?, ?, ?, ?, ?, ?)`,
+    [descricao, tipo, imagem, validade, preco, cod_produtor]
   );
-  return { id: result.lastID, nome, tipo, imagem };
+  return { 
+    cod_produto: result.lastID, 
+    descricao, 
+    tipo, 
+    imagem, 
+    validade, 
+    preco, 
+    cod_produtor 
+  };
 }
 
 async function read() {
@@ -16,9 +24,11 @@ async function read() {
   return produtos;
 }
 
-async function readB() {
+async function readProdutores() {
   const db = await Database.connect();
-  const produtor = await db.all ('select * from produtor');
-  return produtor;
+  const produtores = await db.all('SELECT * FROM produtor');
+  return produtores;
 }
-export default { create, read, readB };
+
+export default { create, read, readProdutores };
+
