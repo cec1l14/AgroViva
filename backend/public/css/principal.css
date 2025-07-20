@@ -101,7 +101,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 10px);
   }
   .container-l h1{
-    font-size: 36px;
+    text-shadow: 1px 1px 0 #fff, 2px 2px 5px #000;
+    font-size: 46px;
     text-align: center;
     color: #a5c32a;
     font-weight: bold;
@@ -195,13 +196,15 @@
   
   .container-cadastro {
     width: 420px;
-    background-color: #d9d9d9;
+    background-color:rgba(255, 255, 255, 0.7);
+    border: 0px solid rgba(255, 255, 255, 0.7);
     border-radius: 12px;
     padding: 30px 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 10px);
   }
   
   .container-cadastro h1 {
+    text-shadow: 1px 1px 0 #fff, 2px 2px 5px #000;
     font-size: 46px;
     text-align: center;
     color: #a5c32a;
