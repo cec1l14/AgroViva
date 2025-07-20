@@ -94,8 +94,8 @@
 
   .container-l {
     width: 420px;
-    background-color: #d9d9d9;
-    border: 2px solid #d9d9d9;
+    background-color:rgba(255, 255, 255, 0.7);
+    border: 0px solid rgba(255, 255, 255, 0.7);
     border-radius: 12px;
     padding: 30px 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 10px);
