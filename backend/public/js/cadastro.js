@@ -10,6 +10,7 @@ function mostrarSenha(){
         btnShowPass.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
     }
 };
+document.getElementById('btn-senha').addEventListener('click', mostrarSenha);
 
 const form = document.querySelector('form');
 
