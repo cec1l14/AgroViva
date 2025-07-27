@@ -8,7 +8,7 @@ async function up() {
       cod_produtor INTEGER PRIMARY KEY AUTOINCREMENT,
       email VARCHAR(40) NOT NULL,
       telefone NUMERIC(13) NOT NULL,
-      cod_id INTEGER NOT NULL,
+      nome VARCHAR(40) NOT NULL,
       senha VARCHAR(40) NOT NULL,
       cpf NUMERIC(11) NOT NULL
     );

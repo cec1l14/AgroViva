@@ -10,31 +10,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
-<body class="body-cadastro">
-    <main class="container-cadastro">
-      <form id ="form-cadastro">
-        <h1>Cadastro</h1>
-        <div class="input-box">
-          <input placeholder="Nome" type="text" id="nome">
-          <i class="bx bxs-user"></i>
-        </div>
-        <div class="input-box">
-          <input type="email" placeholder="Email" id="email">
-          <i class="fa-solid fa-envelope"></i>
-        </div>
-        <div class="input-box">
-          <input placeholder="Senha" type="password" id="senha">
-          <i class="bi bi-eye-fill" id="btn-senha" onclick="mostrarSenhaa()"></i>
-        </div>
-        <div class="senhas-cadastro">
-          <label>
-            <input type="checkbox" id="Produtor"> Produtor
-            <input type="checkbox" id="Empresario"> Empresário
-          </label>
-        </div>
-        <button type="submit" class="login">Criar</button>
-      </form>
-    </main>
-    <script src="js/cadastro.js" type="module"></script>
-  </body>
-  </html>
+
+<body class="body-cadastro">  
+  <main class="container-cadastro">
+      <form id="form-cadastro">
+  <h1>Cadastro</h1>
+
+  <div class="input-box">
+    <input placeholder="Nome" type="text" id="nome">
+    <i class="bx bxs-user"></i>
+  </div>
+
+  <div class="input-box">
+    <input type="email" placeholder="Email" id="email">
+    <i class="fa-solid fa-envelope"></i>
+  </div>
+
+  <div class="input-box">
+    <input placeholder="Telefone" type="text" id="telefone">
+    <i class="fa-solid fa-phone"></i>
+  </div>
+
+  <div class="input-box">
+    <input placeholder="CPF" type="text" id="cpf">
+    <i class="fa-solid fa-id-card"></i>
+  </div>
+  
+  <div class="input-box">
+    <input placeholder="Senha" type="password" id="senha">
+    <i class="bi bi-eye-fill" id="btn-senha" onclick="mostrarSenha()"></i>
+  </div>
+
+  <div class="senhas-cadastro">
+    <label>
+      <input type="checkbox" id="Produtor"> Produtor
+      <input type="checkbox" id="Empresario"> Empresário
+    </label>
+  </div>
+
+  <button type="submit" class="login">Criar</button>
+</form>
+<script src="js/cadastro.js" type="module"></script>
+</body>
+</html>

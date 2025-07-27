@@ -21,6 +21,10 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/home.html'));
 });
+//rota para o cadastro
+app.get('/cadastro', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/cadastro.html'));
+});
 
 // Rota para a API, usando o router importado
 app.use('/api', router);

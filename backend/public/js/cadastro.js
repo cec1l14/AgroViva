@@ -1,4 +1,4 @@
-function mostrarSenhaa(){
+function mostrarSenha(){
     var inputPass = document.getElementById('senha');
     var btnShowPass = document.getElementById ('btn-senha');
 
@@ -16,18 +16,16 @@ const form = document.querySelector('form');
 form.addEventListener('submit', async (event) => {
   event.preventDefault(); 
 
-  // Pega os valores dos inputs pelo id
+  
   const nome = document.getElementById('nome').value.trim();
   const email = document.getElementById('email').value.trim();
   const senha = document.getElementById('senha').value.trim();
-
-
-  const data = { nome, email, senha };
-
-  console.log('Dados enviados:', data);
+  const telefone = document.getElementById('telefone').value.trim();
+  const cpf = document.getElementById('cpf').value.trim();
+  const data = {nome, email, telefone, senha, cpf };
 
   try {
-    const response = await fetch('/cadastro', {
+    const response = await fetch('/api/produtor', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -36,13 +34,14 @@ form.addEventListener('submit', async (event) => {
     const resData = await response.json();
 
     if (response.ok) {
-      alert(resData.message);
-      form.reset(); // limpa form
+      alert('Usuário cadastrado com sucesso!');
+      form.reset();
     } else {
       alert('Erro: ' + resData.error);
     }
 
   } catch (error) {
     console.error('Erro na requisição:', error);
+    alert('Erro ao se comunicar com o servidor.');
   }
 });

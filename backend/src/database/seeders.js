@@ -17,12 +17,12 @@ async function up() {
   // Inserir produtores
   for (const produtor of data.produtor) {
     await db.run(`
-      INSERT INTO produtor (email, telefone, cod_id, senha, cpf)
+      INSERT INTO produtor (email, telefone, nome, senha, cpf)
       VALUES (?, ?, ?, ?, ?)
     `, [
       produtor.email,
       produtor.telefone,
-      produtor.cod_id,
+      produtor.nome,
       produtor.senha,
       produtor.cpf
     ]);

@@ -17,6 +17,22 @@ async function create({ descricao, tipo, imagem, validade, preco, cod_produtor }
     cod_produtor 
   };
 }
+async function createProdutor({ email, telefone, nome, senha, cpf }) {
+  const db = await Database.connect();
+
+  const result = await db.run(`
+    INSERT INTO produtor (email, telefone, nome, senha, cpf)
+    VALUES (?, ?, ?, ?, ?)
+  `, [email, telefone, nome, senha, cpf]);
+
+  return {
+    cod_produtor: result.lastID,
+    email,
+    telefone,
+    nome,
+    cpf
+  };
+}
 
 async function read() {
   const db = await Database.connect();
@@ -30,5 +46,6 @@ async function readB() {
   return produtores;
 }
 
-export default { create, read, readB };
+
+export default { create, read, readB,createProdutor };
 
