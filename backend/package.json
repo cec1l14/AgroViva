@@ -9,9 +9,10 @@
     "db:drop": "rm src/database/db.sqlite"
   },
   "dependencies": {
+    "@prisma/client": "^6.12.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "morgan": "^1.10.0",
-    "sqlite-async": "^1.2.2"
+    "prisma": "^6.12.0"
   }
 }
