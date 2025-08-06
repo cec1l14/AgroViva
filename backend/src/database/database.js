@@ -1,6 +1,4 @@
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'url';
-import { Database } from 'sqlite-async';
+import { PrismaClient} from 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const dbFile = resolve(__dirname, 'db.sqlite'); 
@@ -10,3 +8,11 @@ async function connect() {
 }
 
 export default { connect };
+generator client {
+  provider = "prisma-client-js"
+}
+ 
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
