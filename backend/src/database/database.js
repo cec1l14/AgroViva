@@ -1,18 +1,7 @@
-import { PrismaClient} from 
+import { PrismaClient } from '../generated/prisma/client.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const dbFile = resolve(__dirname, 'db.sqlite'); 
+const prisma = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
 
-async function connect() {
-  return await Database.open(dbFile);
-}
-
-export default { connect };
-generator client {
-  provider = "prisma-client-js"
-}
- 
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-}
+export default prisma;
