@@ -19,7 +19,7 @@ app.use(express.json());
 
 // Rota para a raiz '/', serve o arquivo home.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/home.html'));
+  res.sendFile(path.join(__dirname, '../public/login.html'));
 });
 //rota para o cadastro
 app.get('/cadastro', (req, res) => {

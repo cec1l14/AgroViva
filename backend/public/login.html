@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroViva</title>
+    <title>AgroViva - Login</title>
     <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="css/principal.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
@@ -11,14 +12,14 @@
 <body class="body-login">
     <div>
         <main class="container-l">
-            <form action="">
+            <form id="formLogin">
                 <h1> Login </h1>
                 <div class="input-box">
-                    <input placeholder="usuario@gmail.com" type="email" name="" id="email">
+                    <input placeholder="usuario@gmail.com" type="email" name="email" id="email" required>
                     <i class="bx bxs-user"></i>
                 </div>
                 <div class="input-box">
-                    <input placeholder="********" type="password" name="" id="senha">
+                    <input placeholder="********" type="password" name="senha" id="senha" required>
                     <i class="bi bi-eye-fill" id="btn-senha" onclick="mostrarSenha()"></i>
                 </div>
 
@@ -27,13 +28,20 @@
                         <input type="checkbox">
                         Lembrar senha
                     </label>
-                    <a href="cadastro.html" target="_blank"> Cadastrar-se</a>
+                    <a href="cadastro.html">Cadastrar-se</a>
                 </div>
 
-                <button type="submit" class="login" onclick="submeterFormulario()"">Entrar</button>
+                <button type="submit" class="login">Entrar</button>
             </form>  
         </main>
     </div>
     <script src="js/login.js"></script>
+    <script>
+        function mostrarSenha() {
+            const senha = document.getElementById('senha');
+            senha.type = senha.type === 'password' ? 'text' : 'password';
+        }
+    </script>
 </body>
 </html>
+
