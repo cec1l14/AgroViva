@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -11,9 +8,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Produtor {
-  cod_produtor Int       @id @default( autoincrement())
+  cod_produtor Int       @id @default(autoincrement())
   email        String
   telefone     String
   nome         String
@@ -23,8 +19,8 @@ model Produtor {
 }
 
 model Produto {
-  cod_produto  Int     @id @default( autoincrement())
-  validade    String 
+  cod_produto  Int      @id @default(autoincrement())
+  validade     String
   preco        Float
   descricao    String
   imagem       String
@@ -32,6 +28,7 @@ model Produto {
   cod_produtor Int
   produtor     Produtor @relation("ProdutorProdutos", fields: [cod_produtor], references: [cod_produtor])
 }
+
 
 
 

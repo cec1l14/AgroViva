@@ -6,16 +6,19 @@ const prisma = new PrismaClient();
 
 async function main() {
   const file = resolve('', 'seeders.json');
-
   const seed = JSON.parse(readFileSync(file));
 
+  // Insere produtores
   await prisma.produtor.createMany({
     data: seed.produtor,
   });
+
+  // Insere produtos
   await prisma.produto.createMany({
     data: seed.produtos,
   });
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect();
