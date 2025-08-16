@@ -86,7 +86,8 @@
     display: flex;
     justify-content: center;
     align-items: center ;
-    background: url(../../imagens/plantassaum.jpg);
+    background-color: #617509;
+    /*background: url(../../imagens/plantassaum.jpg);*/
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -188,7 +189,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url(../../imagens/plantassaum.jpg);
+    background-color: #617509;
+    /*background: url(../../imagens/plantassaum.jpg);*/
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -283,6 +285,23 @@
     border: 2px solid;
     transition: 0.25ms;
   }
+
+  .link-login {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.link-login a {
+  text-decoration: none;
+  color: #617509;
+  font-size: 15px;
+}
+
+.link-login a:hover {
+  color: #617509;
+  text-decoration: underline;
+}
+
 
   /* página produtos*/
 
