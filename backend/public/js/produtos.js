@@ -7,7 +7,6 @@ function renderizarProdutos(lista) {
   container.innerHTML = ''; // Limpa o conteúdo antes de renderizar
 
   lista.forEach(produto => {
-    // Verifica se os campos necessários existem
     if (!produto || !produto.descricao) {
       console.warn("Produto inválido:", produto);
       return;
@@ -20,7 +19,7 @@ function renderizarProdutos(lista) {
         <div class="card-body">
           <span class="fa-solid fa-trash delete-icon"></span>
           <h5 class="card-title">${produto.descricao}</h5>
-          <i class="bx bxs-user"></i>
+          <i class="bx bxs-user perfil-icon" data-produtor="${produto.cod_produtor}"></i>
           <p class="card-title">${produto.tipo || 'Sem tipo'}</p>
         </div>
       </div>
@@ -44,7 +43,7 @@ async function carregarProdutos() {
     const response = await fetch('/api/produtos'); 
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     produtos = await response.json();
-    console.log("Produtos recebidos:", produtos); // Verificação no console (IMPORTANTE!!)
+    console.log("Produtos recebidos:", produtos); 
     renderizarProdutos(produtos); 
   } catch (error) {
     console.error('Erro ao carregar produtos:', error);
@@ -60,11 +59,18 @@ function configurarFiltros() {
   });
 }
 
-// Delegação de evento para deletar produto
+// Delegação de evento para delete e perfil
 container.addEventListener('click', function (event) {
+  // Deletar produto
   if (event.target.classList.contains('delete-icon')) {
     const card = event.target.closest('.card');
     if (card) card.remove();
+  }
+
+  // Abrir página do produtor
+  if (event.target.classList.contains('perfil-icon')) {
+    const produtorId = event.target.dataset.produtor;
+    window.location.href = `/produtor.html?id=${produtorId}`;
   }
 });
 

@@ -10,7 +10,7 @@ datasource db {
 
 model Produtor {
   cod_produtor Int       @id @default(autoincrement())
-  email        String
+  email        String @unique
   telefone     String
   nome         String
   senha        String
