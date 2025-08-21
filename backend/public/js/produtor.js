@@ -4,53 +4,48 @@ const emailProdutor = document.getElementById("email-produtor");
 const telefoneProdutor = document.getElementById("telefone-produtor");
 const cpfProdutor = document.getElementById("cpf-produtor");
 
-// Pega o ID do produtor da URL
-const urlParams = new URLSearchParams(window.location.search);
-const produtorId = urlParams.get("id");
+// Pega dados do usuário logado
+const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
 
-async function carregarProdutor() {
-  try {
-    const response = await fetch(`/api/produtor/${produtorId}`);
-    if (!response.ok) throw new Error("Erro ao buscar dados do produtor");
+if (!usuarioLogado) {
+    // Se não estiver logado, redireciona para login
+    window.location.href = 'login.html';
+} else {
+    // Mostra dados do produtor
+    nomeProdutor.textContent = usuarioLogado.nome;
+    emailProdutor.textContent = `Email: ${usuarioLogado.email}`;
+    telefoneProdutor.textContent = `Telefone: ${usuarioLogado.telefone}`;
+    cpfProdutor.textContent = `CPF: ${usuarioLogado.cpf}`;
 
-    const produtor = await response.json();
-    nomeProdutor.textContent = produtor.nome;
-    emailProdutor.textContent = `Email: ${produtor.email}`;
-    telefoneProdutor.textContent = `Telefone: ${produtor.telefone}`;
-    cpfProdutor.textContent = `CPF: ${produtor.cpf}`;
-  } catch (error) {
-    console.error(error);
-    nomeProdutor.textContent = "Produtor não encontrado";
-  }
+    // Carrega produtos do produtor logado
+    async function carregarProdutos() {
+        try {
+            const response = await fetch(`/api/produtos?cod_produtor=${usuarioLogado.cod_produtor}`);
+            if (!response.ok) throw new Error("Erro ao buscar produtos");
+            const produtos = await response.json();
+            container.innerHTML = '';
+
+            produtos.forEach(produto => {
+                const cardProd = document.createElement("div");
+                cardProd.classList.add("col");
+                cardProd.innerHTML = `
+                    <div class="card h-100 shadow-sm">
+                        <img src="${produto.imagem || 'https://via.placeholder.com/150'}" class="card-img-top" alt="${produto.descricao}">
+                        <div class="card-body">
+                            <h5 class="card-title">${produto.descricao}</h5>
+                            <p class="card-text">Tipo: ${produto.tipo || 'Sem tipo'}</p>
+                            <p class="card-text">Preço: R$ ${produto.preco.toFixed(2)}</p>
+                            <p class="card-text">Validade: ${produto.validade}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardProd);
+            });
+        } catch (error) {
+            console.error(error);
+            container.innerHTML = "<p>Erro ao carregar produtos.</p>";
+        }
+    }
+
+    carregarProdutos();
 }
-
-async function carregarProdutos() {
-  try {
-    const response = await fetch(`/api/produtos?cod_produtor=${produtorId}`);
-    if (!response.ok) throw new Error("Erro ao buscar produtos");
-
-    const produtos = await response.json();
-    container.innerHTML = '';
-
-    produtos.forEach(produto => {
-      const cardProd = `
-        <div class="card">
-          <h6 class="produto-disponivel">Produto disponível</h6> 
-          <img src="${produto.imagem || 'https://via.placeholder.com/150'}" class="card-img" alt="${produto.descricao}">
-          <div class="card-body">
-            <h5 class="card-title">${produto.descricao}</h5>
-            <p class="card-title">${produto.tipo || 'Sem tipo'}</p>
-          </div>
-        </div>
-      `;
-      container.insertAdjacentHTML("beforeend", cardProd);
-    });
-  } catch (error) {
-    console.error(error);
-    container.innerHTML = "<p>Erro ao carregar produtos.</p>";
-  }
-}
-
-// Carrega dados do produtor e produtos
-carregarProdutor();
-carregarProdutos();

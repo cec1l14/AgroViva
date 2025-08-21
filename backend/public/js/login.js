@@ -30,8 +30,11 @@ form.addEventListener('submit', async (event) => {
 
         if (response.ok) {
             // login válido
-            alert('Login realizado com sucesso!');
-            window.location.href = 'home.html'; // ou outra página específica
+            // salva dados do produtor no localStorage
+            localStorage.setItem('usuarioLogado', JSON.stringify(data.produtor));
+
+            // redireciona para home
+            window.location.href = 'home.html';
         } else {
             // login inválido
             alert('Erro: ' + data.error);
