@@ -1,31 +1,36 @@
 async function carregarProdutos() {
-    const res = await fetch(`/api/produtos`); // rota atual
-    const produtos = await res.json();
+    try {
+        // Buscar todos os produtos com dados do produtor
+        const res = await fetch(`/api/produtos`);
+        const produtos = await res.json();
 
-    const lista = document.getElementById('lista-produtos');
-    lista.innerHTML = '';
+        const lista = document.getElementById('lista-produtos');
+        lista.innerHTML = '';
 
-    produtos.forEach(produto => {
-        const div = document.createElement('div');
-        div.classList.add('card-produto');
+        produtos.forEach(produto => {
+            const div = document.createElement('div');
+            div.classList.add('card-produto');
 
-        div.innerHTML = `
-            <img src="${produto.imagem || '../imagens/default.jpg'}" alt="${produto.descricao}">
-            <h3>${produto.descricao}</h3>
-            <p>Preço: R$ ${produto.preco.toFixed(2)}</p>
-            <p>Produtor: ${produto.produtor.nome}</p>
-            <p>Contato: ${produto.produtor.telefone}</p>
-            <div class="contato">
-                <a href="https://wa.me/${produto.produtor.telefone}"</a>
-                <p href="tel:${produto.produtor.telefone}" class="ligar">Ligar</p>
-            </div>
-        `;
-        lista.appendChild(div);
-    });
+            div.innerHTML = `
+                <img src="${produto.imagem || '/imagens/default.jpg'}" alt="${produto.descricao}">
+                <h3>${produto.descricao}</h3>
+                <p>Preço: R$ ${produto.preco.toFixed(2)}</p>
+                <p>Produtor: ${produto.produtor.nome}</p>
+                <p>Telefone: ${produto.produtor.telefone}</p>
+            `;
+            lista.appendChild(div);
+        });
+    } catch (error) {
+        console.error('Erro ao carregar produtos:', error);
+        const lista = document.getElementById('lista-produtos');
+        lista.innerHTML = '<p>Erro ao carregar produtos.</p>';
+    }
 }
 
+// Evento de logout
 document.getElementById('logout').addEventListener('click', () => {
     window.location.href = '/';
 });
 
-carregarProdutos();
+// Carregar produtos ao abrir a página
+window.addEventListener('DOMContentLoaded', carregarProdutos);
