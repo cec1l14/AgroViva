@@ -29,6 +29,13 @@ model Produto {
   produtor     Produtor @relation("ProdutorProdutos", fields: [cod_produtor], references: [cod_produtor])
 }
 
-
-
-
+model Empresario {
+  cod_empresario Int     @id @default(autoincrement())
+  nome           String
+  email          String  @unique
+  telefone       String
+  senha          String
+  cnpj           String  @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

@@ -1,4 +1,3 @@
-
 {
   "produtor": [
     {
@@ -9,6 +8,13 @@
       "cpf": "12345678900"
     }
   ],
+  "empresario": [
+    {
+      "email": "empresario@agroviva.com",
+      "senha": "senha123",
+      "cnpj": "12345678000199"
+  }],
+
   "produtos": [
     {
       "descricao": "Abacaxi",

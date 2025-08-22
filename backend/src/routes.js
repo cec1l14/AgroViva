@@ -109,5 +109,41 @@ router.get('/produtor/:id', async (req, res) => {
     res.status(500).json({ error: 'Erro no servidor' });
   }
 });
+// ========================
+// POST cadastrar empresário
+// ========================
+router.post('/empresario', async (req, res) => {
+  const { email, telefone, nome, senha, cnpj } = req.body;
+  if (!email || !telefone || !nome || !senha || !cnpj) {
+    return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+  }
+  try {
+    const novoEmpresario = await prisma.empresario.create({
+      data: { email, telefone, nome, senha, cnpj }
+    });
+    res.status(201).json({ message: 'Empresário cadastrado com sucesso!', novoEmpresario });
+  } catch (error) {
+    console.error('Erro ao cadastrar empresário:', error);
+    res.status(500).json({ error: 'Erro ao cadastrar empresário' });
+  }
+});
+
+// ========================
+// GET empresário por ID
+// ========================
+router.get('/empresario/:id', async (req, res) => {
+  const empresarioId = Number(req.params.id);
+  try {
+    const empresario = await prisma.empresario.findUnique({
+      where: { cod_empresario: empresarioId }
+    });
+    if (!empresario) return res.status(404).json({ error: 'Empresário não encontrado' });
+    res.json(empresario);
+  } catch (error) {
+    console.error('Erro ao buscar empresário:', error);
+    res.status(500).json({ error: 'Erro no servidor' });
+  }
+});
+
 
 export default router;

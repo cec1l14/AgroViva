@@ -26,7 +26,6 @@ app.get('/cadastro', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/cadastro.html'));
 });
 
-
 // Rota para a API, usando o router importado
 app.use('/api', router);
 
