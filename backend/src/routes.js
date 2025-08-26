@@ -120,13 +120,13 @@ router.get('/produtor/:id', async (req, res) => {
 // POST cadastrar empresário
 // ========================
 router.post('/empresario', async (req, res) => {
-  const { email, telefone, nome, senha, cnpj } = req.body;
-  if (!email || !telefone || !nome || !senha || !cnpj) {
+  const { email, nome, senha, cnpj } = req.body;
+  if (!email || !nome || !senha || !cnpj) {
     return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
   }
   try {
     const novoEmpresario = await prisma.empresario.create({
-      data: { email, telefone, nome, senha, cnpj }
+      data: { email, nome, senha, cnpj }
     });
     res.status(201).json({ message: 'Empresário cadastrado com sucesso!', novoEmpresario });
   } catch (error) {
