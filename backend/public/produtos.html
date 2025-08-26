@@ -1,50 +1,53 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos - AgroViva</title>
-    <link rel="stylesheet" href="css/principal.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos</title>
+  <link rel="stylesheet" href="css/principal.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+
 </head>
 <body class="body-produtos">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <!-- Navbar personalizada -->
+  <div class="hero">
+    <nav>
+      <img src="../../imagens/AgroViva-removebg-preview.png" class="logo" alt="AgroViva">
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+      </ul>
+      <img src="../../imagens/cara.png" class="user-pic" onclick="toggleMenu()" alt="Usuário">
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="produtos.html">Produtos</a></li>
-          <li class="nav-item"><a class="nav-link" href="cadastro.html">Cadastro</a></li>
-          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-        </ul>
-        <form class="d-flex" role="search" id="form-pesquisa">
-          <input class="form-control me-2" type="search" placeholder="Pesquisa" aria-label="Search" id="input-pesquisa">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div class="user-info">
+            <img src="../../imagens/cara.png" alt="Usuário">
+            <h2>Alguém</h2>
+          </div>
+          <hr>
+          <a href="#" class="sub-menu-link">
+            <img src="../../imagens/perfil (2).png" alt="">
+            <p>Editar perfil</p>
+            <span></span>
+          </a>
+          <a href="#" class="sub-menu-link">
+            <img src="../../imagens/sair.png" alt="">
+            <p>Sair</p>
+            <span></span>
+          </a>
+        </div>
       </div>
+    </nav>
+  </div>
+
+  <!-- Área de produtos com estrutura Bootstrap -->
+  <div class="container my-4">
+    <div class="row" id="produtos-container">
+      <!-- Os cards serão inseridos aqui pelo JS -->
     </div>
-  </nav>
-
-  <!-- Perfil do Empresário (reserva para futuro) -->
-  <section id="perfil-empresario" class="my-4 p-4 border rounded shadow-sm bg-light d-none">
-    <h2 id="nome-empresario">Empresário</h2>
-    <p id="email-empresario"></p>
-    <p id="telefone-empresario"></p>
-    <p id="cnpj-empresario"></p>
-  </section>
-
-  <!-- Produtos -->
-  <div class="container my-4" id="produtos-container">
-    <!-- Produtos carregados dinamicamente -->
   </div>
 
   <!-- Filtro lateral -->
@@ -57,6 +60,14 @@
       <p class="filtro" data-tipo="Grão">Grão</p>
     </div>
   </div>
+
+  <!-- Scripts -->
+  <script>
+    function toggleMenu() {
+      const subMenu = document.getElementById("subMenu");
+      subMenu.classList.toggle("open-menu");
+    }
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/produtos.js" type="module"></script>
