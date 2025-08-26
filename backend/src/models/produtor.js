@@ -24,7 +24,4 @@ async function readProdutores(includeProdutos = false) {
   return produtores;
 }
 
-export default {
-  createProdutor,
-  readProdutores,
-};
+export { createProdutor, readProdutores };

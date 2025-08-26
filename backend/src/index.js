@@ -17,11 +17,12 @@ app.use('/imagens', express.static(path.join(__dirname, '../../imagens')));
 // Para receber JSON no corpo das requisições
 app.use(express.json());
 
-// Rota para a raiz '/', serve o arquivo home.html
+// Rota para a raiz '/', serve o arquivo login.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/login.html'));
 });
-//rota para o cadastro
+
+// Rota para o cadastro
 app.get('/cadastro', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/cadastro.html'));
 });
@@ -29,8 +30,7 @@ app.get('/cadastro', (req, res) => {
 // Rota para a API, usando o router importado
 app.use('/api', router);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
-

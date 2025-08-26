@@ -5,18 +5,32 @@ import { PrismaClient } from '../src/generated/prisma/client.js';
 const prisma = new PrismaClient();
 
 async function main() {
-  const file = resolve('', 'seeders.json');
-  const seed = JSON.parse(readFileSync(file));
+  // Resolve o caminho para o seeders.json dentro da pasta prisma
+  const file = resolve('', 'prisma/seeders.json');
+  const seed = JSON.parse(readFileSync(file, 'utf-8'));
 
   // Insere produtores
-  await prisma.produtor.createMany({
-    data: seed.produtor,
-  });
+  if (seed.produtor && seed.produtor.length > 0) {
+    await prisma.produtor.createMany({
+      data: seed.produtor,
+    });
+  }
+
+  // Insere empresários
+  if (seed.empresario && seed.empresario.length > 0) {
+    await prisma.empresario.createMany({
+      data: seed.empresario,
+    });
+  }
 
   // Insere produtos
-  await prisma.produto.createMany({
-    data: seed.produtos,
-  });
+  if (seed.produtos && seed.produtos.length > 0) {
+    await prisma.produto.createMany({
+      data: seed.produtos,
+    });
+  }
+
+  console.log('Seed finalizado com sucesso!');
 }
 
 main()

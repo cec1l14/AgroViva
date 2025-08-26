@@ -1,4 +1,4 @@
-import { PrismaClient } from '../generated/prisma/index.js';
+import { PrismaClient } from '../generated/prisma/client.js';
 
 const prisma = new PrismaClient();
 
@@ -7,7 +7,7 @@ async function createProduto({ descricao, tipo, imagem, validade, preco, cod_pro
     data: {
       descricao,
       tipo,
-      imagem,
+      imagem: imagem || null,
       validade: new Date(validade),
       preco,
       cod_produtor
@@ -39,4 +39,4 @@ async function readProdutores() {
   return produtores;
 }
 
-export default { createProduto, createProdutor, readProdutos, readProdutores };
+export { createProduto, createProdutor, readProdutos, readProdutores };

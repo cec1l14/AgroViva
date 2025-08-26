@@ -62,13 +62,16 @@ form.addEventListener('submit', async (event) => {
 
     const data = { nome, email, telefone, senha };
     let url = '';
+    let redirectUrl = '';
 
     if (tipo === 'PRODUTOR') {
         data.cpf = cpfCnpj; // Para produtores
         url = '/api/produtor';
+        redirectUrl = '/produtor.html';
     } else {
         data.cnpj = cpfCnpj; // Para empresários
         url = '/api/empresario';
+        redirectUrl = '/empresario.html';
     }
 
     try {
@@ -84,11 +87,11 @@ form.addEventListener('submit', async (event) => {
             alert('Usuário cadastrado com sucesso!');
             form.reset();
 
-            // Redirecionamento
+            // Redirecionamento usando o ID retornado
             if (tipo === 'PRODUTOR') {
-                window.location.href = `/produtor.html?id=${result.novoProdutor.cod_produtor}`;
+                window.location.href = `${redirectUrl}?id=${result.novoProdutor.cod_produtor}`;
             } else {
-                window.location.href = `/empresario.html?id=${result.novoEmpresario.cod_empresario}`;
+                window.location.href = `${redirectUrl}?id=${result.novoEmpresario.cod_empresario}`;
             }
 
         } else {

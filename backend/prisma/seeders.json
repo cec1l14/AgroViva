@@ -1,7 +1,8 @@
 {
   "produtor": [
     {
-      "email": "produtor@agroviva.com",
+      "id": 1,
+      "email": "produtor1@agroviva.com",
       "telefone": "11999999999",
       "nome": "Patricio",
       "senha": "senha123",
@@ -10,13 +11,16 @@
   ],
   "empresario": [
     {
-      "email": "empresario@agroviva.com",
+      "id": 1,
+      "email": "empresario1@agroviva.com",
       "senha": "senha123",
-      "cnpj": "12345678000199"
-  }],
-
+      "cnpj": "12345678000199",
+      "nome": "Empresario Exemplo"
+    }
+  ],
   "produtos": [
     {
+      "id": 1,
       "descricao": "Abacaxi",
       "tipo": "Fruta",
       "imagem": "../imagens/abacaxi.jpg",
@@ -25,6 +29,7 @@
       "cod_produtor": 1
     },
     {
+      "id": 2,
       "descricao": "Alho",
       "tipo": "Legume",
       "imagem": "../imagens/alho.jpg",
@@ -33,130 +38,11 @@
       "cod_produtor": 1
     },
     {
+      "id": 3,
       "descricao": "Arroz",
       "tipo": "Grão",
       "imagem": "../imagens/arrozin.jpg",
       "preco": 4.50,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Banana",
-      "tipo": "Fruta",
-      "imagem": "../imagens/bananas.jpg",
-      "preco": 2.99,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Batata",
-      "tipo": "Legume",
-      "imagem": "../imagens/batata.jpg",
-      "preco": 3.20,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Café",
-      "tipo": "Grão",
-      "imagem": "../imagens/graocafe.jpg",
-      "preco": 12.90,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Caju",
-      "tipo": "Fruta",
-      "imagem": "../imagens/caju.jpg",
-      "preco": 4.80,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Cebola",
-      "tipo": "Legume",
-      "imagem": "../imagens/cebolas.jpg",
-      "preco": 2.70,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Cenoura",
-      "tipo": "Legume",
-      "imagem": "../imagens/cenoura.jpg",
-      "preco": 2.99,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Chia",
-      "tipo": "Grão",
-      "imagem": "../imagens/chia.jpg",
-      "preco": 8.90,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Feijão",
-      "tipo": "Legume",
-      "imagem": "../imagens/feijao.jpg",
-      "preco": 6.49,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Gergelim",
-      "tipo": "Grão",
-      "imagem": "../imagens/gergelim.jpg",
-      "preco": 7.99,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Grão de Bico",
-      "tipo": "Legume",
-      "imagem": "../imagens/graodebico.jpg",
-      "preco": 9.30,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Laranja",
-      "tipo": "Fruta",
-      "imagem": "../imagens/laranja.jpg",
-      "preco": 2.99,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Limão",
-      "tipo": "Fruta",
-      "imagem": "../imagens/limoes.jpg",
-      "preco": 2.50,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Maçã",
-      "tipo": "Fruta",
-      "imagem": "../imagens/maça.jpg",
-      "preco": 3.99,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Pimentão",
-      "tipo": "Legume",
-      "imagem": "../imagens/pimentao.jpg",
-      "preco": 4.20,
-      "validade": "2025-12-31",
-      "cod_produtor": 1
-    },
-    {
-      "descricao": "Tomate",
-      "tipo": "Legume",
-      "imagem": "../imagens/tomate.jpg",
-      "preco": 3.10,
       "validade": "2025-12-31",
       "cod_produtor": 1
     }

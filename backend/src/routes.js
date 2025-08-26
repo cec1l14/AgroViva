@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 router.get('/produtos', async (req, res) => {
   try {
     const produtos = await prisma.produto.findMany({
-      include: { produtor: true } // traz dados do produtor junto
+      include: { produtor: true }
     });
     res.json(produtos);
   } catch (error) {
@@ -23,13 +23,13 @@ router.get('/produtos', async (req, res) => {
 // POST cadastrar produtor
 // ========================
 router.post('/produtor', async (req, res) => {
-  const { email, telefone, nome, senha, cpf, tipo } = req.body;
-  if (!email || !telefone || !nome || !senha || !cpf || !tipo) {
+  const { email, telefone, nome, senha, cpf } = req.body;
+  if (!email || !telefone || !nome || !senha || !cpf) {
     return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
   }
   try {
     const novoProdutor = await prisma.produtor.create({
-      data: { email, telefone, nome, senha, cpf, tipo }
+      data: { email, telefone, nome, senha, cpf }
     });
     res.status(201).json({ message: 'Produtor cadastrado com sucesso!', novoProdutor });
   } catch (error) {
@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
 
   try {
     const produtor = await prisma.produtor.findFirst({
-      where: { email, senha } // comparação direta, sem bcrypt
+      where: { email, senha }
     });
 
     if (!produtor) {
@@ -63,8 +63,7 @@ router.post('/login', async (req, res) => {
         nome: produtor.nome,
         email: produtor.email,
         telefone: produtor.telefone,
-        cpf: produtor.cpf,
-        tipo: produtor.tipo
+        cpf: produtor.cpf
       }
     });
   } catch (error) {
@@ -78,13 +77,20 @@ router.post('/login', async (req, res) => {
 // ========================
 router.post('/produtos', async (req, res) => {
   const { validade, preco, descricao, imagem, tipo, cod_produtor } = req.body;
-  if (!validade || !preco || !descricao || !imagem || !tipo || !cod_produtor) {
-    return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+  if (!validade || !preco || !descricao || !tipo || !cod_produtor) {
+    return res.status(400).json({ error: 'Todos os campos obrigatórios exceto imagem' });
   }
 
   try {
     const novoProduto = await prisma.produto.create({
-      data: { validade, preco, descricao, imagem, tipo, cod_produtor }
+      data: {
+        validade: new Date(validade),
+        preco,
+        descricao,
+        tipo,
+        cod_produtor,
+        imagem: imagem || null
+      }
     });
     res.status(201).json({ message: 'Produto cadastrado com sucesso!', novoProduto });
   } catch (error) {
@@ -109,6 +115,7 @@ router.get('/produtor/:id', async (req, res) => {
     res.status(500).json({ error: 'Erro no servidor' });
   }
 });
+
 // ========================
 // POST cadastrar empresário
 // ========================
@@ -144,6 +151,5 @@ router.get('/empresario/:id', async (req, res) => {
     res.status(500).json({ error: 'Erro no servidor' });
   }
 });
-
 
 export default router;

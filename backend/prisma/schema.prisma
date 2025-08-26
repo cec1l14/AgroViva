@@ -8,34 +8,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Produtor {
-  cod_produtor Int       @id @default(autoincrement())
-  email        String @unique
-  telefone     String
-  nome         String
-  senha        String
-  cpf          String
-  produtos     Produto[] @relation("ProdutorProdutos")
+model produtor {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String   @unique
+  telefone String
+  senha    String
+  cpf      String   @unique
+  produtos produto[]
 }
 
-model Produto {
-  cod_produto  Int      @id @default(autoincrement())
-  validade     String
-  preco        Float
+model empresario {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  email String @unique
+  senha  String
+  cnpj  String @unique
+}
+
+model produto {
+  id           Int      @id @default(autoincrement())
   descricao    String
-  imagem       String
   tipo         String
+  imagem       String?
+  preco        Float
+  validade     String
   cod_produtor Int
-  produtor     Produtor @relation("ProdutorProdutos", fields: [cod_produtor], references: [cod_produtor])
-}
-
-model Empresario {
-  cod_empresario Int     @id @default(autoincrement())
-  nome           String
-  email          String  @unique
-  telefone       String
-  senha          String
-  cnpj           String  @unique
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  produtor     produtor @relation(fields: [cod_produtor], references: [id])
 }
