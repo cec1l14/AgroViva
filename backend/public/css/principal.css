@@ -441,7 +441,7 @@ nav ul li a{
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 20rem; /
+  width: 20rem; 
   max-width: 90%;
 }
 
