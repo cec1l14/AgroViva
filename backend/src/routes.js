@@ -58,10 +58,7 @@ router.post('/empresario', async (req, res) => {
 });
 
 // ========================
-// POST login unificado (produtor ou empresário)
-// ========================
-// ========================
-// POST login sem tipo
+// POST login unificado
 // ========================
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
@@ -70,7 +67,7 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    // 1️⃣ Buscar em Produtor
+    // Buscar em Produtor
     const produtor = await prisma.produtor.findFirst({
       where: { email, senha }
     });
@@ -80,7 +77,7 @@ router.post('/login', async (req, res) => {
         message: 'Login realizado com sucesso',
         tipo: 'produtor',
         usuario: {
-          cod: produtor.cod_produtor,
+          id: produtor.id,
           nome: produtor.nome,
           email: produtor.email,
           telefone: produtor.telefone,
@@ -89,7 +86,7 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // 2 Se não encontrou, buscar em Empresário
+    // Buscar em Empresário
     const empresario = await prisma.empresario.findFirst({
       where: { email, senha }
     });
@@ -99,7 +96,7 @@ router.post('/login', async (req, res) => {
         message: 'Login realizado com sucesso',
         tipo: 'empresario',
         usuario: {
-          cod: empresario.cod_empresario,
+          id: empresario.id,
           nome: empresario.nome,
           email: empresario.email,
           cnpj: empresario.cnpj
@@ -107,7 +104,6 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // 3️⃣ Se não encontrou em nenhum
     return res.status(401).json({ error: 'Email ou senha incorretos' });
 
   } catch (error) {
@@ -120,8 +116,8 @@ router.post('/login', async (req, res) => {
 // POST cadastrar produto
 // ========================
 router.post('/produtos', async (req, res) => {
-  const { validade, preco, descricao, imagem, tipo, cod_produtor } = req.body;
-  if (!validade || !preco || !descricao || !tipo || !cod_produtor) {
+  const { validade, preco, descricao, imagem, tipo, id_produtor } = req.body;
+  if (!validade || !preco || !descricao || !tipo || !id_produtor) {
     return res.status(400).json({ error: 'Todos os campos obrigatórios exceto imagem' });
   }
 
@@ -132,7 +128,7 @@ router.post('/produtos', async (req, res) => {
         preco,
         descricao,
         tipo,
-        cod_produtor,
+        produtor: { connect: { id: Number(id_produtor) } },
         imagem: imagem || null
       }
     });
@@ -150,7 +146,7 @@ router.get('/produtor/:id', async (req, res) => {
   const produtorId = Number(req.params.id);
   try {
     const produtor = await prisma.produtor.findUnique({
-      where: { cod_produtor: produtorId }
+      where: { id: produtorId }
     });
     if (!produtor) return res.status(404).json({ error: 'Produtor não encontrado' });
     res.json(produtor);
@@ -167,7 +163,7 @@ router.get('/empresario/:id', async (req, res) => {
   const empresarioId = Number(req.params.id);
   try {
     const empresario = await prisma.empresario.findUnique({
-      where: { cod_empresario: empresarioId }
+      where: { id: empresarioId }
     });
     if (!empresario) return res.status(404).json({ error: 'Empresário não encontrado' });
     res.json(empresario);

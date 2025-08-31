@@ -4,8 +4,10 @@ const emailProdutor = document.getElementById("email-produtor");
 const telefoneProdutor = document.getElementById("telefone-produtor");
 const cpfProdutor = document.getElementById("cpf-produtor");
 
-// Pega dados do usuário logado
-const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+const usuarioLogadoRaw = localStorage.getItem('usuarioLogado');
+const usuarioLogado = (usuarioLogadoRaw && usuarioLogadoRaw !== 'undefined') 
+    ? JSON.parse(usuarioLogadoRaw) 
+    : null;
 
 if (!usuarioLogado) {
     // Se não estiver logado, redireciona para login
