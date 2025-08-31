@@ -39,7 +39,29 @@ router.post('/produtor', async (req, res) => {
 });
 
 // ========================
-// POST login básico
+// POST cadastrar empresário
+// ========================
+router.post('/empresario', async (req, res) => {
+  const { email, nome, senha, cnpj } = req.body;
+  if (!email || !nome || !senha || !cnpj) {
+    return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+  }
+  try {
+    const novoEmpresario = await prisma.empresario.create({
+      data: { email, nome, senha, cnpj }
+    });
+    res.status(201).json({ message: 'Empresário cadastrado com sucesso!', novoEmpresario });
+  } catch (error) {
+    console.error('Erro ao cadastrar empresário:', error);
+    res.status(500).json({ error: 'Erro ao cadastrar empresário' });
+  }
+});
+
+// ========================
+// POST login unificado (produtor ou empresário)
+// ========================
+// ========================
+// POST login sem tipo
 // ========================
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
@@ -48,24 +70,46 @@ router.post('/login', async (req, res) => {
   }
 
   try {
+    // 1️⃣ Buscar em Produtor
     const produtor = await prisma.produtor.findFirst({
       where: { email, senha }
     });
 
-    if (!produtor) {
-      return res.status(401).json({ error: 'Email ou senha incorretos' });
+    if (produtor) {
+      return res.status(200).json({
+        message: 'Login realizado com sucesso',
+        tipo: 'produtor',
+        usuario: {
+          cod: produtor.cod_produtor,
+          nome: produtor.nome,
+          email: produtor.email,
+          telefone: produtor.telefone,
+          cpf: produtor.cpf
+        }
+      });
     }
 
-    res.status(200).json({
-      message: 'Login realizado com sucesso',
-      produtor: {
-        cod_produtor: produtor.cod_produtor,
-        nome: produtor.nome,
-        email: produtor.email,
-        telefone: produtor.telefone,
-        cpf: produtor.cpf
-      }
+    // 2 Se não encontrou, buscar em Empresário
+    const empresario = await prisma.empresario.findFirst({
+      where: { email, senha }
     });
+
+    if (empresario) {
+      return res.status(200).json({
+        message: 'Login realizado com sucesso',
+        tipo: 'empresario',
+        usuario: {
+          cod: empresario.cod_empresario,
+          nome: empresario.nome,
+          email: empresario.email,
+          cnpj: empresario.cnpj
+        }
+      });
+    }
+
+    // 3️⃣ Se não encontrou em nenhum
+    return res.status(401).json({ error: 'Email ou senha incorretos' });
+
   } catch (error) {
     console.error('Erro ao logar:', error);
     res.status(500).json({ error: 'Erro no servidor' });
@@ -113,25 +157,6 @@ router.get('/produtor/:id', async (req, res) => {
   } catch (error) {
     console.error('Erro ao buscar produtor:', error);
     res.status(500).json({ error: 'Erro no servidor' });
-  }
-});
-
-// ========================
-// POST cadastrar empresário
-// ========================
-router.post('/empresario', async (req, res) => {
-  const { email, nome, senha, cnpj } = req.body;
-  if (!email || !nome || !senha || !cnpj) {
-    return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
-  }
-  try {
-    const novoEmpresario = await prisma.empresario.create({
-      data: { email, nome, senha, cnpj }
-    });
-    res.status(201).json({ message: 'Empresário cadastrado com sucesso!', novoEmpresario });
-  } catch (error) {
-    console.error('Erro ao cadastrar empresário:', error);
-    res.status(500).json({ error: 'Erro ao cadastrar empresário' });
   }
 });
 
