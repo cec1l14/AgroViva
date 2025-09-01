@@ -31,7 +31,12 @@ router.get('/produtos', async (req, res) => {
 router.post('/produtos', async (req, res) => {
   const { descricao, tipo, preco, validade, imagem, cod_produtor } = req.body;
 
-  if (!descricao || !tipo || !preco || !validade || !cod_produtor) {
+  // Bloquear se não houver cod_produtor
+  if (!cod_produtor) {
+    return res.status(403).json({ error: 'Apenas produtores podem cadastrar produtos.' });
+  }
+
+  if (!descricao || !tipo || !preco || !validade) {
     return res.status(400).json({ error: 'Todos os campos obrigatórios exceto imagem' });
   }
 

@@ -1,12 +1,13 @@
 const lista = document.getElementById('lista-produtos');
 const nomeEmpresario = document.getElementById('nome-empresario');
 const logoutBtn = document.getElementById('logout');
+
 const btnNovoProduto = document.getElementById('btn-novo-produto');
 const formProdutoSection = document.getElementById('form-produto-section');
 const formProduto = document.getElementById('form-produto');
 const btnCancelarProduto = document.getElementById('btn-cancelar-produto');
 
-// Pega dados do empresário logado
+// Pega dados do usuário logado
 const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
 
 if (!usuarioLogado) {
@@ -17,6 +18,10 @@ if (!usuarioLogado) {
 
 // Abrir formulário de cadastro de produto
 btnNovoProduto.addEventListener('click', () => {
+    if (usuarioLogado.tipo !== 'produtor') {
+        alert('Apenas produtores podem cadastrar produtos!');
+        return;
+    }
     formProdutoSection.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
@@ -31,6 +36,11 @@ btnCancelarProduto.addEventListener('click', () => {
 formProduto.addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    if (usuarioLogado.tipo !== 'produtor') {
+        alert('Apenas produtores podem cadastrar produtos!');
+        return;
+    }
+
     const descricao = document.getElementById('descricao').value.trim();
     const tipo = document.getElementById('tipo').value;
     const preco = parseFloat(document.getElementById('preco').value);
@@ -42,7 +52,6 @@ formProduto.addEventListener('submit', async (event) => {
         return;
     }
 
-    // Dados do produto a enviar
     const data = {
         descricao,
         tipo,
@@ -51,8 +60,6 @@ formProduto.addEventListener('submit', async (event) => {
         imagem: imagem || null,
         cod_produtor: usuarioLogado.id
     };
-
-    console.log('Dados enviados para cadastro de produto:', data);
 
     try {
         const response = await fetch('/api/produtos', {
@@ -80,11 +87,10 @@ formProduto.addEventListener('submit', async (event) => {
 // Carrega produtos
 async function carregarProdutos() {
     try {
-        // Opcional: filtrar por cod_produtor
-        const response = await fetch(`/api/produtos?cod_produtor=${usuarioLogado.id}`);
+        const response = await fetch(`/api/produtos`);
         if (!response.ok) throw new Error("Erro ao buscar produtos");
-
         const produtos = await response.json();
+
         lista.innerHTML = '';
 
         produtos.forEach(produto => {
