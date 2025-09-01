@@ -1,53 +1,78 @@
 const container = document.getElementById("produtos-container");
-const nomeProdutor = document.getElementById("nome-produtor");
-const emailProdutor = document.getElementById("email-produtor");
-const telefoneProdutor = document.getElementById("telefone-produtor");
-const cpfProdutor = document.getElementById("cpf-produtor");
+const botoesFiltro = document.querySelectorAll('.filtro');
 
+let produtos = []; // Lista de produtos
+
+// Pega usuário logado
 const usuarioLogadoRaw = localStorage.getItem('usuarioLogado');
-const usuarioLogado = (usuarioLogadoRaw && usuarioLogadoRaw !== 'undefined') 
-    ? JSON.parse(usuarioLogadoRaw) 
+const usuarioLogado = (usuarioLogadoRaw && usuarioLogadoRaw !== 'undefined')
+    ? JSON.parse(usuarioLogadoRaw)
     : null;
 
 if (!usuarioLogado) {
-    // Se não estiver logado, redireciona para login
     window.location.href = 'login.html';
-} else {
-    // Mostra dados do produtor
-    nomeProdutor.textContent = usuarioLogado.nome;
-    emailProdutor.textContent = `Email: ${usuarioLogado.email}`;
-    telefoneProdutor.textContent = `Telefone: ${usuarioLogado.telefone}`;
-    cpfProdutor.textContent = `CPF: ${usuarioLogado.cpf}`;
-
-    // Carrega produtos do produtor logado
-    async function carregarProdutos() {
-        try {
-            const response = await fetch(`/api/produtos?cod_produtor=${usuarioLogado.cod_produtor}`);
-            if (!response.ok) throw new Error("Erro ao buscar produtos");
-            const produtos = await response.json();
-            container.innerHTML = '';
-
-            produtos.forEach(produto => {
-                const cardProd = document.createElement("div");
-                cardProd.classList.add("col");
-                cardProd.innerHTML = `
-                    <div class="card h-100 shadow-sm">
-                        <img src="${produto.imagem || 'https://via.placeholder.com/150'}" class="card-img-top" alt="${produto.descricao}">
-                        <div class="card-body">
-                            <h5 class="card-title">${produto.descricao}</h5>
-                            <p class="card-text">Tipo: ${produto.tipo || 'Sem tipo'}</p>
-                            <p class="card-text">Preço: R$ ${produto.preco.toFixed(2)}</p>
-                            <p class="card-text">Validade: ${produto.validade}</p>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(cardProd);
-            });
-        } catch (error) {
-            console.error(error);
-            container.innerHTML = "<p>Erro ao carregar produtos.</p>";
-        }
-    }
-
-    carregarProdutos();
 }
+
+// Função para renderizar produtos na tela
+function renderizarProdutos(lista) {
+    container.innerHTML = '';
+
+    lista.forEach(produto => {
+        if (!produto || !produto.descricao) {
+            console.warn("Produto inválido:", produto);
+            return;
+        }
+
+        const cardProd = `
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm" id="produto-${produto.id}">
+                    <img src="${produto.imagem || 'https://via.placeholder.com/150'}" class="card-img-top" alt="${produto.descricao}">
+                    <div class="card-body">
+                        <h5 class="card-title">${produto.descricao}</h5>
+                        <p class="card-text">Tipo: ${produto.tipo || 'Sem tipo'}</p>
+                        <p class="card-text">Preço: R$ ${produto.preco.toFixed(2)}</p>
+                        <p class="card-text">Validade: ${produto.validade}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.insertAdjacentHTML("beforeend", cardProd);
+    });
+}
+
+// Filtrar produtos por tipo
+function filtrarProdutos(tipo) {
+    if (tipo === "Todos") {
+        renderizarProdutos(produtos);
+    } else {
+        const filtrados = produtos.filter(produto => produto.tipo === tipo);
+        renderizarProdutos(filtrados);
+    }
+}
+
+// Carregar produtos da API (apenas do produtor logado)
+async function carregarProdutos() {
+    try {
+        const response = await fetch(`/api/produtos?cod_produtor=${usuarioLogado.id}`);
+        if (!response.ok) throw new Error(`Erro HTTP! Status: ${response.status}`);
+        produtos = await response.json();
+        renderizarProdutos(produtos);
+    } catch (error) {
+        console.error('Erro ao carregar produtos:', error);
+        container.innerHTML = '<p>Erro ao carregar produtos.</p>';
+    }
+}
+
+// Configurar filtros (se houver na página)
+function configurarFiltros() {
+    botoesFiltro.forEach(botao => {
+        botao.addEventListener('click', () => {
+            const tipo = botao.dataset.tipo;
+            filtrarProdutos(tipo);
+        });
+    });
+}
+
+// Inicialização
+carregarProdutos();
+configurarFiltros();

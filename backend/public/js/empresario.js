@@ -1,7 +1,6 @@
 const lista = document.getElementById('lista-produtos');
 const nomeEmpresario = document.getElementById('nome-empresario');
 const logoutBtn = document.getElementById('logout');
-
 const btnNovoProduto = document.getElementById('btn-novo-produto');
 const formProdutoSection = document.getElementById('form-produto-section');
 const formProduto = document.getElementById('form-produto');
@@ -43,14 +42,17 @@ formProduto.addEventListener('submit', async (event) => {
         return;
     }
 
+    // Dados do produto a enviar
     const data = {
         descricao,
         tipo,
         preco,
         validade,
-        imagem,
-        cod_produtor: usuarioLogado.cod_empresario // associar produto ao empresário
+        imagem: imagem || null,
+        cod_produtor: usuarioLogado.id
     };
+
+    console.log('Dados enviados para cadastro de produto:', data);
 
     try {
         const response = await fetch('/api/produtos', {
@@ -78,19 +80,22 @@ formProduto.addEventListener('submit', async (event) => {
 // Carrega produtos
 async function carregarProdutos() {
     try {
-        const response = await fetch('/api/produtos'); // Futuramente: filtrar por cod_empresario
+        // Opcional: filtrar por cod_produtor
+        const response = await fetch(`/api/produtos?cod_produtor=${usuarioLogado.id}`);
         if (!response.ok) throw new Error("Erro ao buscar produtos");
-        const produtos = await response.json();
 
+        const produtos = await response.json();
         lista.innerHTML = '';
 
         produtos.forEach(produto => {
             const div = document.createElement('div');
             div.classList.add('col');
 
+            const imagemProduto = produto.imagem ? `/imagens/${produto.imagem}` : '/imagens/default.jpg';
+
             div.innerHTML = `
                 <div class="card h-100 shadow-sm">
-                    <img src="${produto.imagem || '../imagens/default.jpg'}" class="card-img-top" alt="${produto.descricao}">
+                    <img src="${imagemProduto}" class="card-img-top" alt="${produto.descricao}">
                     <div class="card-body">
                         <h5 class="card-title">${produto.descricao}</h5>
                         <p class="card-text">Preço: R$ ${produto.preco.toFixed(2)}</p>
