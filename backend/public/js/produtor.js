@@ -3,19 +3,37 @@ const botoesFiltro = document.querySelectorAll('.filtro');
 
 let produtos = []; // Lista de produtos
 
+// -------------------------------
 // Pega usuário logado
+// -------------------------------
 const usuarioLogadoRaw = localStorage.getItem('usuarioLogado');
 const usuarioLogado = (usuarioLogadoRaw && usuarioLogadoRaw !== 'undefined')
     ? JSON.parse(usuarioLogadoRaw)
     : null;
 
-if (!usuarioLogado) {
+// Redireciona se não houver usuário logado
+if (!usuarioLogado || !usuarioLogado.id) {
     window.location.href = 'login.html';
 }
 
+// -------------------------------
+// Preenche dados do produtor no perfil
+// -------------------------------
+const nomeProdutor = document.getElementById('nome-produtor');
+const emailProdutor = document.getElementById('email-produtor');
+const telefoneProdutor = document.getElementById('telefone-produtor');
+const cpfProdutor = document.getElementById('cpf-produtor');
+
+if (nomeProdutor) nomeProdutor.textContent = `Nome: ${usuarioLogado.nome || 'Produtor'}`;
+if (emailProdutor) emailProdutor.textContent = `Email: ${usuarioLogado.email || ''}`;
+if (telefoneProdutor) telefoneProdutor.textContent = `Telefone: ${usuarioLogado.telefone || ''}`;
+if (cpfProdutor) cpfProdutor.textContent = `CPF: ${usuarioLogado.cpf || ''}`;
+
+// -------------------------------
 // Função para renderizar produtos na tela
+// -------------------------------
 function renderizarProdutos(lista) {
-    container.innerHTML = '';
+    container.innerHTML = ''; // Limpa container
 
     lista.forEach(produto => {
         if (!produto || !produto.descricao) {
@@ -24,9 +42,9 @@ function renderizarProdutos(lista) {
         }
 
         const cardProd = `
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm" id="produto-${produto.id}">
-                    <img src="${produto.imagem || 'https://via.placeholder.com/150'}" class="card-img-top" alt="${produto.descricao}">
+            <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                <div class="card h-100 shadow-sm" style="min-width: 280px; max-width: 350px;" id="produto-${produto.id || produto.cod_produto}">
+                    <img src="${produto.imagem ? `/imagens/${produto.imagem}` : '/imagens/default.jpg'}" class="card-img-top" alt="${produto.descricao}">
                     <div class="card-body">
                         <h5 class="card-title">${produto.descricao}</h5>
                         <p class="card-text">Tipo: ${produto.tipo || 'Sem tipo'}</p>
@@ -40,7 +58,9 @@ function renderizarProdutos(lista) {
     });
 }
 
+// -------------------------------
 // Filtrar produtos por tipo
+// -------------------------------
 function filtrarProdutos(tipo) {
     if (tipo === "Todos") {
         renderizarProdutos(produtos);
@@ -50,7 +70,9 @@ function filtrarProdutos(tipo) {
     }
 }
 
-// Carregar produtos da API (apenas do produtor logado)
+// -------------------------------
+// Carregar produtos do backend
+// -------------------------------
 async function carregarProdutos() {
     try {
         const response = await fetch(`/api/produtos?cod_produtor=${usuarioLogado.id}`);
@@ -63,8 +85,12 @@ async function carregarProdutos() {
     }
 }
 
-// Configurar filtros (se houver na página)
+// -------------------------------
+// Configurar filtros
+// -------------------------------
 function configurarFiltros() {
+    if (!botoesFiltro) return;
+
     botoesFiltro.forEach(botao => {
         botao.addEventListener('click', () => {
             const tipo = botao.dataset.tipo;
@@ -73,6 +99,8 @@ function configurarFiltros() {
     });
 }
 
+// -------------------------------
 // Inicialização
+// -------------------------------
 carregarProdutos();
 configurarFiltros();
