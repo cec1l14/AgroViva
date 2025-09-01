@@ -18,7 +18,7 @@ if (!usuarioLogado) {
 
 // Abrir formulário de cadastro de produto
 btnNovoProduto.addEventListener('click', () => {
-    if (usuarioLogado.tipo !== 'produtor') {
+    if (!usuarioLogado.cpf) { // apenas produtores têm cpf
         alert('Apenas produtores podem cadastrar produtos!');
         return;
     }
@@ -36,7 +36,7 @@ btnCancelarProduto.addEventListener('click', () => {
 formProduto.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    if (usuarioLogado.tipo !== 'produtor') {
+    if (!usuarioLogado.cpf) { // apenas produtores têm cpf
         alert('Apenas produtores podem cadastrar produtos!');
         return;
     }
