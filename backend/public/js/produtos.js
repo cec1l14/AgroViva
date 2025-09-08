@@ -16,7 +16,7 @@ function renderizarProdutos(lista) {
     const cardProd = `
       <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm" id="produto-${produto.cod_produto}">
-          <img src="${produto.imagem || 'https://via.placeholder.com/150'}" class="card-img-top" alt="${produto.descricao}">
+          <img src="${produto.imagem || "/imagens/default.jpg"}" class="card-img-top" alt="${produto.descricao}">
           <div class="card-body">
             <h5 class="card-title">${produto.descricao}</h5>
             <p class="card-text">Tipo: ${produto.tipo || 'Sem tipo'}</p>
