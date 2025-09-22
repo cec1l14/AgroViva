@@ -1,64 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/principal.css">
-    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home - AgroViva</title>
+    <link rel="stylesheet" href="css/principal.css" />
 </head>
 <body class="body-home">
+
+    <!-- Seção principal (Hero) -->
     <div class="hero">
         <nav>
-            <img src="../../imagens/AgroViva-removebg-preview.png" class="logo">
+            <img src="../../imagens/AgroViva-removebg-preview.png" class="logo" alt="Logo AgroViva" />
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
             </ul>
-            <img src="../../imagens/cara.png" class="user-pic" onclick="toggleMenu()">
-            
+            <img src="../../imagens/cara.png" class="user-pic" alt="Usuário" onclick="toggleMenu()" />
+
+            <!-- Menu suspenso do usuário -->
             <div class="sub-menu-wrap" id="subMenu">
                 <div class="sub-menu">
                     <div class="user-info">
-                        <img src="../../imagens/cara.png">
+                        <img src="../../imagens/cara.png" alt="Usuário" />
                         <h2>Alguém</h2>
                     </div>
-                    <hr>
-
-
-                    <a href="#" class="sub-menu-link">
-                        <img src="../../imagens/perfil (2).png">
+                    <hr />
+                    <a href="perfil.html" class="sub-menu-link">
+                        <img src="../../imagens/perfil.png" alt="Perfil" />
                         <p>Editar perfil</p>
                         <span></span>
                     </a>
 
-                    <a href="#" class="sub-menu-link">
-                        <img src="../../imagens/sair.png">
+                    <!-- Botão de logout -->
+                    <a href="#" id="logoutBtn" class="sub-menu-link">
+                        <img src="../../imagens/sair.png" alt="Sair" />
                         <p>Sair</p>
                         <span></span>
                     </a>
-
                 </div>
             </div>
-
         </nav>
-
     </div>
 
-  <main class="centro">
-    <div class="caixa">
-      <h1 class="h1-home">AgroViva</h1>
-    </div>
-  </main>   
+    <!-- Conteúdo principal -->
+    <main class="centro">
+        <div class="caixa">
+            <h1 class="h1-home">AgroViva</h1>
+        </div>
+    </main>
 
+    <!-- Scripts -->
+    <script>
+        // Alternar menu do usuário
+        const subMenu = document.getElementById("subMenu");
 
-<script>
-    let subMenu = document.getElementById("subMenu");
+        function toggleMenu() {
+            subMenu.classList.toggle("open-menu");
+        }
 
-    function toggleMenu(){
-        subMenu.classList.toggle("open-menu");
-    }
+        // Função de logout (sem JWT)
+        document.getElementById("logoutBtn").addEventListener("click", function (e) {
+            e.preventDefault();
 
-</script>
+            // Aqui você pode limpar dados locais se desejar, por exemplo:
+            // localStorage.clear();
 
+            // Redirecionar para página de login
+            window.location.href = "login.html"; // Ajuste o nome da página conforme necessário
+        });
+    </script>
 </body>
 </html>
