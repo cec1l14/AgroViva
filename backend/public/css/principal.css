@@ -1,3 +1,58 @@
+/* Layout especial para página de produtos */
+.produtos-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 30px;
+  margin-top: 60px;
+  padding-left: 0;
+}
+
+.filtro-wrapper {
+  margin-top: 0;
+  margin-left: 0;
+  position: sticky;
+  top: 30px;
+  left: 0;
+  width: 220px;
+  min-width: 180px;
+  max-width: 250px;
+  font-family: Arial, sans-serif;
+  z-index: 10;
+  transition: all 0.3s;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+
+#produtos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 30px;
+  flex: 1 1 0%;
+}
+
+@media (max-width: 900px) {
+  .produtos-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .filtro-wrapper {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+    margin: 0 0 20px 0;
+    top: 0;
+    left: 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+}
 /* página home */
 
 * {
@@ -492,12 +547,83 @@ nav ul li a{
 
 .filtro-wrapper {
   margin-top: 30px;
-  position: absolute;
-  top: 110px;
-  left: 40px;
+  position: relative;
   width: 250px;
   font-family: Arial, sans-serif;
   z-index: 10;
+  transition: all 0.3s;
+}
+
+@media (max-width: 1200px) {
+  .filtro-wrapper {
+    position: static;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto 0 auto;
+    margin-left: 15px;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    display: block;
+  }
+}
+
+@media (max-width: 900px) {
+  .filtro-wrapper {
+    width: 100%;
+    max-width: 100vw;
+    margin: 10px auto 0 auto;
+    margin-left: 10px;
+    position: static;
+    left: 0;
+    top: 0;
+    z-index: 10;
+  }
+}
+
+@media (max-width: 700px) {
+  .filtro-wrapper {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto 10px auto;
+    margin-left: 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 5;
+    z-index: 100;
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .container, #produtos-container {
+    margin-top: 100px !important;
+  }
+}
+
+@media (max-width: 1100px), (max-zoom: 1.2) {
+  .filtro-wrapper {
+    position: static;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto 0 auto;
+    margin-left: 5px;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    display: block;
+  }
+}
+
+@media (max-width: 700px) {
+  .filtro-wrapper {
+    width: 95%;
+    max-width: 95vw;
+    margin: 10px auto 0 auto;
+    position: static;
+    left: 0;
+    top: 0;
+  }
 }
 
 .filtro-toggle {

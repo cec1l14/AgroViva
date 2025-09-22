@@ -43,21 +43,19 @@
     </nav>
   </div>
 
-  <!-- Área de produtos com estrutura Bootstrap -->
-  <div class="container my-4">
-    <div class="row" id="produtos-container">
-      <!-- Os cards serão inseridos aqui pelo JS -->
+  <!-- Área de produtos com filtro lateral fixo -->
+  <div class="produtos-flex">
+    <div class="filtro-wrapper">
+      <input type="checkbox" id="filtro-toggle" class="filtro-toggle">
+      <label for="filtro-toggle" class="filtro-label">Filtro</label>
+      <div class="opcoes-filtro">
+        <p class="filtro" data-tipo="Fruta">Fruta</p>
+        <p class="filtro" data-tipo="Legume">Legume</p>
+        <p class="filtro" data-tipo="Grão">Grão</p>
+      </div>
     </div>
-  </div>
-
-  <!-- Filtro lateral -->
-  <div class="filtro-wrapper mt-3">
-    <input type="checkbox" id="filtro-toggle" class="filtro-toggle">
-    <label for="filtro-toggle" class="filtro-label">Filtro</label>
-    <div class="opcoes-filtro">
-      <p class="filtro" data-tipo="Fruta">Fruta</p>
-      <p class="filtro" data-tipo="Legume">Legume</p>
-      <p class="filtro" data-tipo="Grão">Grão</p>
+    <div id="produtos-container">
+      <!-- Os cards serão inseridos aqui pelo JS -->
     </div>
   </div>
 
