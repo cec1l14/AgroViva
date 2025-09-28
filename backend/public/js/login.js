@@ -1,18 +1,3 @@
-// Função para mostrar/esconder a senha
-function mostrarSenha() {
-    const inputPass = document.getElementById('senha');
-    const btnShowPass = document.getElementById('btn-senha');
-
-    if (inputPass.type === 'password') {
-        inputPass.type = 'text';
-        btnShowPass.classList.replace('bi-eye-fill', 'bi-eye-slash-fill');
-    } else {
-        inputPass.type = 'password';
-        btnShowPass.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
-    }
-}
-
-// Referência ao formulário de login
 const form = document.getElementById('formLogin');
 
 form.addEventListener('submit', async (event) => {
@@ -33,18 +18,11 @@ form.addEventListener('submit', async (event) => {
             body: JSON.stringify({ email, senha })
         });
 
-        let data;
-        try {
-            data = await response.json();
-        } catch {
-            data = {};
-        }
+        const data = await response.json();
 
-        // 🔹 Alteração importante: acessar data.usuario (como retorna o backend)
-        if (response.ok && data.usuario) {
-            // Salvar usuário logado no localStorage
+        if (response.ok && data.usuario && data.token) {
             localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
-            // Redirecionar para home.html
+            localStorage.setItem('token', data.token); // salvar JWT
             window.location.href = 'home.html';
         } else {
             alert('Erro: ' + (data.error || 'Falha no login.'));

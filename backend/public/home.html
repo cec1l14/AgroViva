@@ -51,24 +51,25 @@
     </main>
 
     <!-- Scripts -->
-    <script>
-        // Alternar menu do usuário
-        const subMenu = document.getElementById("subMenu");
+<script>
+    // Verifica se usuário está logado
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    if (!usuarioLogado) {
+        window.location.href = 'login.html';
+    }
 
-        function toggleMenu() {
-            subMenu.classList.toggle("open-menu");
-        }
+    // Alternar menu
+    const subMenu = document.getElementById("subMenu");
+    function toggleMenu() { subMenu.classList.toggle("open-menu"); }
 
-        // Função de logout (sem JWT)
-        document.getElementById("logoutBtn").addEventListener("click", function (e) {
-            e.preventDefault();
+    // Logout
+    document.getElementById("logoutBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+        localStorage.removeItem('usuarioLogado');
+        localStorage.removeItem('token'); // remove JWT
+        window.location.href = "login.html";
+    });
+</script>
 
-            // Aqui você pode limpar dados locais se desejar, por exemplo:
-            // localStorage.clear();
-
-            // Redirecionar para página de login
-            window.location.href = "login.html"; // Ajuste o nome da página conforme necessário
-        });
-    </script>
 </body>
 </html>

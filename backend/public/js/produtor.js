@@ -13,6 +13,7 @@ const usuarioLogado = (usuarioLogadoRaw && usuarioLogadoRaw !== 'undefined')
 
 // Redireciona se não houver usuário logado
 if (!usuarioLogado || !usuarioLogado.id) {
+    console.warn("Usuário não logado, redirecionando para login...");
     window.location.href = 'login.html';
 }
 
@@ -24,10 +25,24 @@ const emailProdutor = document.getElementById('email-produtor');
 const telefoneProdutor = document.getElementById('telefone-produtor');
 const cpfProdutor = document.getElementById('cpf-produtor');
 
-if (nomeProdutor) nomeProdutor.textContent = `Nome: ${usuarioLogado.nome || 'Produtor'}`;
+if (nomeProdutor) nomeProdutor.textContent = `${usuarioLogado.nome || 'Produtor'}`;
 if (emailProdutor) emailProdutor.textContent = `Email: ${usuarioLogado.email || ''}`;
 if (telefoneProdutor) telefoneProdutor.textContent = `Telefone: ${usuarioLogado.telefone || ''}`;
 if (cpfProdutor) cpfProdutor.textContent = `CPF: ${usuarioLogado.cpf || ''}`;
+
+// -------------------------------
+// Logout
+// -------------------------------
+document.querySelectorAll('.sub-menu-link').forEach(link => {
+    if (link.querySelector('p')?.textContent === 'Sair') {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('token');
+            localStorage.removeItem('usuarioLogado');
+            window.location.href = 'login.html';
+        });
+    }
+});
 
 // -------------------------------
 // Função para renderizar produtos na tela
@@ -71,21 +86,6 @@ function filtrarProdutos(tipo) {
 }
 
 // -------------------------------
-// Carregar produtos do backend
-// -------------------------------
-async function carregarProdutos() {
-    try {
-        const response = await fetch(`/api/produtos?cod_produtor=${usuarioLogado.id}`);
-        if (!response.ok) throw new Error(`Erro HTTP! Status: ${response.status}`);
-        produtos = await response.json();
-        renderizarProdutos(produtos);
-    } catch (error) {
-        console.error('Erro ao carregar produtos:', error);
-        container.innerHTML = '<p>Erro ao carregar produtos.</p>';
-    }
-}
-
-// -------------------------------
 // Configurar filtros
 // -------------------------------
 function configurarFiltros() {
@@ -97,6 +97,35 @@ function configurarFiltros() {
             filtrarProdutos(tipo);
         });
     });
+}
+
+// -------------------------------
+// Carregar produtos do backend
+// -------------------------------
+async function carregarProdutos() {
+    try {
+        const token = localStorage.getItem('token'); // Pega JWT
+        console.log("Token JWT usado:", token);
+
+        const response = await fetch(`/api/produtos?cod_produtor=${usuarioLogado.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Envia token
+            }
+        });
+
+        console.log("Status da resposta:", response.status);
+
+        if (!response.ok) throw new Error(`Erro HTTP! Status: ${response.status}`);
+
+        produtos = await response.json();
+        console.log("Produtos recebidos do produtor:", produtos);
+
+        renderizarProdutos(produtos);
+    } catch (error) {
+        console.error('Erro ao carregar produtos:', error);
+        container.innerHTML = '<p>Erro ao carregar produtos.</p>';
+    }
 }
 
 // -------------------------------
