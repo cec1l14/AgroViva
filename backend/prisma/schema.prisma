@@ -18,12 +18,13 @@ model produtor {
   produtos produto[]
 }
 
-model empresario {
-  id    Int    @id @default(autoincrement())
-  nome  String
-  email String @unique
-  senha  String
-  cnpj  String @unique
+model Empresario {
+  id       Int     @id @default(autoincrement())
+  nome     String
+  email    String  @unique
+  senha    String
+  telefone String 
+  cnpj     String
 }
 
 model produto {

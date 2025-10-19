@@ -1,24 +1,28 @@
+// ========================
 // Mostrar/ocultar senha
+// ========================
 function mostrarSenha() {
     const inputPass = document.getElementById('senha');
     const btnShowPass = document.getElementById('btn-senha');
 
     if (inputPass.type === 'password') {
-        inputPass.setAttribute('type', 'text');
+        inputPass.type = 'text';
         btnShowPass.classList.replace('bi-eye-fill', 'bi-eye-slash-fill');
     } else {
-        inputPass.setAttribute('type', 'password');
+        inputPass.type = 'password';
         btnShowPass.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
     }
 }
 document.getElementById('btn-senha').addEventListener('click', mostrarSenha);
 
+// ========================
 // Elementos
+// ========================
 const inputCpfCnpj = document.getElementById('cpf');
 const checkboxProdutor = document.getElementById('Produtor');
 const checkboxEmpresario = document.getElementById('Empresario');
 
-// Função para alternar placeholder entre CPF e CNPJ
+// Alternar placeholder entre CPF e CNPJ
 function alternarCpfCnpj() {
     if (checkboxProdutor.checked) {
         inputCpfCnpj.placeholder = 'CPF';
@@ -29,7 +33,7 @@ function alternarCpfCnpj() {
     }
 }
 
-// Garante que apenas um checkbox esteja marcado e atualiza placeholder
+// Apenas um checkbox marcado
 checkboxProdutor.addEventListener('change', () => {
     if (checkboxProdutor.checked) checkboxEmpresario.checked = false;
     alternarCpfCnpj();
@@ -40,20 +44,31 @@ checkboxEmpresario.addEventListener('change', () => {
     alternarCpfCnpj();
 });
 
+// ========================
 // Submit do formulário
+// ========================
 const form = document.querySelector('form');
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    // Capturar valores
     const nome = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
     const senha = document.getElementById('senha').value.trim();
     const telefone = document.getElementById('telefone').value.trim();
     const cpfCnpj = inputCpfCnpj.value.trim();
 
-    // Identificar o tipo de usuário
+    // Identificar tipo de usuário
     const tipo = checkboxProdutor.checked ? 'PRODUTOR' : checkboxEmpresario.checked ? 'EMPRESARIO' : null;
+
+    // ========================
+    // Validação básica no front-end
+    // ========================
+    if (!nome || !email || !senha || !cpfCnpj) {
+        alert('Preencha todos os campos obrigatórios!');
+        return;
+    }
 
     if (!tipo) {
         alert('Selecione Produtor ou Empresário.');
@@ -65,11 +80,11 @@ form.addEventListener('submit', async (event) => {
     let redirectUrl = '';
 
     if (tipo === 'PRODUTOR') {
-        data.cpf = cpfCnpj; // Para produtores
+        data.cpf = cpfCnpj;
         url = '/api/produtor';
         redirectUrl = '/produtor.html';
     } else {
-        data.cnpj = cpfCnpj; // Para empresários
+        data.cnpj = cpfCnpj;
         url = '/api/empresario';
         redirectUrl = '/empresario.html';
     }
@@ -87,15 +102,20 @@ form.addEventListener('submit', async (event) => {
             alert('Usuário cadastrado com sucesso!');
             form.reset();
 
-            // Redirecionamento usando o ID retornado
+            // Redirecionamento usando ID correto retornado do backend
             if (tipo === 'PRODUTOR') {
-                window.location.href = `${redirectUrl}?id=${result.novoProdutor.cod_produtor}`;
+                window.location.href = `${redirectUrl}?id=${result.produtor.id}`;
             } else {
-                window.location.href = `${redirectUrl}?id=${result.novoEmpresario.cod_empresario}`;
+                window.location.href = `${redirectUrl}?id=${result.empresario.id}`;
             }
 
         } else {
-            alert('Erro: ' + result.error);
+            // Mostrar erros retornados do backend
+            if (result.errors && Array.isArray(result.errors)) {
+                alert(result.errors.map(e => e.message).join('\n'));
+            } else {
+                alert('Erro: ' + (result.error || 'Erro desconhecido'));
+            }
         }
 
     } catch (error) {
