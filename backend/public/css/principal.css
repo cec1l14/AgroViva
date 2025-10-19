@@ -407,6 +407,47 @@ nav ul li a{
     color: #617509;
   }
   
+  .erro-msg {
+  color: #e74c3c;                 /* Vermelho suave */
+  font-size: 0.85rem;
+  margin-top: 6px;
+  margin-left: 4px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  animation: fadeIn 0.25s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Ícone de alerta para acompanhar o texto */
+.erro-msg::before {
+  content: "\f071";               /* ícone de exclamação do Font Awesome */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 0.9rem;
+}
+
+/* Animação de entrada suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Opcional: destaque sutil no input com erro */
+.input-box input.erro {
+  border: 1.5px solid #e74c3c !important;
+  box-shadow: 0 0 4px rgba(231, 76, 60, 0.3);
+  transition: 0.3s ease;
+}
+
+/* Quando o usuário começa a corrigir, suaviza o erro */
+.input-box input:focus.erro {
+  border-color: #f39c12 !important;
+  box-shadow: 0 0 6px rgba(243, 156, 18, 0.3);
+}
+
+  
   .senhas-cadastro {
     display: flex;
     margin-top: -10px;
