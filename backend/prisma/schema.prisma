@@ -24,7 +24,7 @@ model Empresario {
   email    String  @unique
   senha    String
   telefone String 
-  cnpj     String
+  cnpj     String  @unique
 }
 
 model produto {
