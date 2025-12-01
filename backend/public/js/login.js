@@ -1,5 +1,11 @@
 const form = document.getElementById('formLogin');
 
+// Verifica se já há um usuário logado
+const usuarioExistente = localStorage.getItem('usuarioLogado');
+if (usuarioExistente) {
+    window.location.href = 'home.html';
+}
+
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -20,9 +26,15 @@ form.addEventListener('submit', async (event) => {
 
         const data = await response.json();
 
-        if (response.ok && data.usuario && data.token) {
-            localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
-            localStorage.setItem('token', data.token); // salvar JWT
+        if (response.ok && data.usuario && data.token && data.tipo) {
+            // Salva usuário, tipo e token no localStorage
+            localStorage.setItem(
+                'usuarioLogado',
+                JSON.stringify({ ...data.usuario, tipo: data.tipo })
+            );
+            localStorage.setItem('token', data.token);
+
+            // Redireciona para home
             window.location.href = 'home.html';
         } else {
             alert('Erro: ' + (data.error || 'Falha no login.'));
