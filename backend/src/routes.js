@@ -3,9 +3,36 @@ import jwt from 'jsonwebtoken';
 import { PrismaClient } from './generated/prisma/client.js';
 import { z } from 'zod';
 import { isAuthenticated } from './middleware/autentico.js';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 const prisma = new PrismaClient();
+
+// ========================
+// Garantir que a pasta de imagens exista
+// ========================
+const imagensDir = path.join(__dirname, '../imagens'); // ../imagens a partir de src/
+if (!fs.existsSync(imagensDir)) {
+  fs.mkdirSync(imagensDir, { recursive: true });
+}
+
+// ========================
+// Configuração Multer
+// ========================
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, imagensDir),
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
+});
+const upload = multer({ storage });
 
 // ========================
 // LOGIN (JWT)
@@ -19,36 +46,34 @@ router.post('/login', async (req, res) => {
   try {
     const { email, senha } = loginSchema.parse(req.body);
 
-    // Verifica produtor
     const produtor = await prisma.produtor.findFirst({ where: { email, senha } });
     if (produtor) {
       const token = jwt.sign({ userId: produtor.id, tipo: 'produtor' }, process.env.JWT_SECRET, { expiresIn: '1h' });
       return res.status(200).json({
         message: 'Login realizado com sucesso',
         tipo: 'produtor',
-        usuario: { 
-          id: produtor.id, 
-          nome: produtor.nome, 
+        usuario: {
+          id: produtor.id,
+          nome: produtor.nome,
           email: produtor.email,
-          cpf: produtor.cpf,       // << necessário para front
+          cpf: produtor.cpf,
           telefone: produtor.telefone || null
         },
         token,
       });
     }
 
-    // Verifica empresário
     const empresario = await prisma.empresario.findFirst({ where: { email, senha } });
     if (empresario) {
       const token = jwt.sign({ userId: empresario.id, tipo: 'empresario' }, process.env.JWT_SECRET, { expiresIn: '1h' });
       return res.status(200).json({
         message: 'Login realizado com sucesso',
         tipo: 'empresario',
-        usuario: { 
-          id: empresario.id, 
-          nome: empresario.nome, 
+        usuario: {
+          id: empresario.id,
+          nome: empresario.nome,
           email: empresario.email,
-          cnpj: empresario.cnpj,    // útil para front, caso necessário
+          cnpj: empresario.cnpj,
           telefone: empresario.telefone || null
         },
         token,
@@ -56,7 +81,6 @@ router.post('/login', async (req, res) => {
     }
 
     return res.status(401).json({ error: 'Email ou senha incorretos' });
-
   } catch (error) {
     console.error('Erro ao logar:', error);
     if (error instanceof z.ZodError) {
@@ -71,27 +95,18 @@ router.post('/login', async (req, res) => {
 // CADASTRAR PRODUTOR
 // ========================
 router.post('/produtor', async (req, res) => {
-  const produtorSchema = z.object({
+  const schema = z.object({
     nome: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
     email: z.string().email('Email inválido'),
     senha: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
-    telefone: z.string().min(8, 'Telefone inválido').optional(),
-    cpf: z.string().min(11, 'CPF inválido').optional(),
+    telefone: z.string().optional(),
+    cpf: z.string().optional(),
   });
 
   try {
-    const parsed = produtorSchema.parse(req.body);
-    const novoProdutor = await prisma.produtor.create({
-      data: {
-        nome: parsed.nome,
-        email: parsed.email,
-        senha: parsed.senha,
-        telefone: parsed.telefone || null,
-        cpf: parsed.cpf || null,
-      },
-    });
-
-    res.status(201).json({ message: 'Produtor cadastrado com sucesso!', produtor: novoProdutor });
+    const parsed = schema.parse(req.body);
+    const novoProdutor = await prisma.produtor.create({ data: parsed });
+    res.status(201).json({ message: 'Produtor cadastrado com sucesso', produtor: novoProdutor });
   } catch (error) {
     console.error('Erro ao cadastrar produtor:', error);
     if (error instanceof z.ZodError) {
@@ -109,27 +124,18 @@ router.post('/produtor', async (req, res) => {
 // CADASTRAR EMPRESÁRIO
 // ========================
 router.post('/empresario', async (req, res) => {
-  const empresarioSchema = z.object({
+  const schema = z.object({
     nome: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
     email: z.string().email('Email inválido'),
     senha: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
-    telefone: z.string().min(8, 'Telefone inválido').optional(),
-    cnpj: z.string().min(14, 'CNPJ inválido'),
+    telefone: z.string().optional(),
+    cnpj: z.string(),
   });
 
   try {
-    const parsed = empresarioSchema.parse(req.body);
-    const novoEmpresario = await prisma.empresario.create({
-      data: {
-        nome: parsed.nome,
-        email: parsed.email,
-        senha: parsed.senha,
-        telefone: parsed.telefone || null,
-        cnpj: parsed.cnpj,
-      },
-    });
-
-    res.status(201).json({ message: 'Empresário cadastrado com sucesso!', empresario: novoEmpresario });
+    const parsed = schema.parse(req.body);
+    const novoEmpresario = await prisma.empresario.create({ data: parsed });
+    res.status(201).json({ message: 'Empresário cadastrado com sucesso', empresario: novoEmpresario });
   } catch (error) {
     console.error('Erro ao cadastrar empresário:', error);
     if (error instanceof z.ZodError) {
@@ -151,19 +157,19 @@ router.get('/produtos', isAuthenticated, async (req, res) => {
     const produtos = await prisma.produto.findMany({ include: { produtor: true } });
     res.json(produtos);
   } catch (error) {
-    console.error('Erro na rota /produtos:', error);
+    console.error('Erro ao listar produtos:', error);
     res.status(500).json({ errors: [{ field: null, message: 'Não foi possível listar os produtos' }] });
   }
 });
 
 // ========================
-// CADASTRAR PRODUTO
+// CADASTRAR PRODUTO COM UPLOAD
 // ========================
-router.post('/produtos', isAuthenticated, async (req, res) => {
+router.post('/produtos', isAuthenticated, upload.single('imagem'), async (req, res) => {
   try {
-    const { descricao, tipo, preco, validade, imagem, cod_produtor } = req.body;
+    const { descricao, tipo, preco, validade, cod_produtor } = req.body;
+    const imagem = req.file ? req.file.filename : null;
 
-    // Validação básica
     if (!descricao || !tipo || !preco || !validade || !cod_produtor) {
       return res.status(400).json({ errors: [{ field: null, message: 'Dados incompletos' }] });
     }
@@ -172,10 +178,10 @@ router.post('/produtos', isAuthenticated, async (req, res) => {
       data: {
         descricao,
         tipo,
-        preco,
-        validade: validade,
-        imagem: imagem || null,
-        cod_produtor,
+        preco: parseFloat(preco),
+        validade,
+        imagem,
+        cod_produtor: parseInt(cod_produtor),
       },
     });
 
@@ -185,7 +191,6 @@ router.post('/produtos', isAuthenticated, async (req, res) => {
     res.status(500).json({ errors: [{ field: null, message: 'Erro interno ao cadastrar produto' }] });
   }
 });
-
 
 // ========================
 // 404 e tratamento global

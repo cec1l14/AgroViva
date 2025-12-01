@@ -11,29 +11,33 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Serve arquivos estáticos da pasta 'public'
+// ========================
+// Middlewares
+// ========================
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // necessário se for receber FormData
 app.use(express.static(path.join(__dirname, '../public')));
-
-// Serve a pasta 'imagens' para URLs começando com '/imagens'
 app.use('/imagens', express.static(path.join(__dirname, '../../imagens')));
 
-// Para receber JSON no corpo das requisições
-app.use(express.json());
-
-// Rota para a raiz '/', serve o arquivo login.html
+// ========================
+// Rotas principais
+// ========================
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/login.html'));
 });
 
-// Rota para o cadastro
 app.get('/cadastro', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/cadastro.html'));
 });
 
-// Rota para a API, usando o router importado
+// Rotas da API
 app.use('/api', router);
 
+// ========================
+// Inicia o servidor
+// ========================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
