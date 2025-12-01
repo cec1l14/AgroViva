@@ -17,7 +17,7 @@ const prisma = new PrismaClient();
 // ========================
 // Garantir que a pasta de imagens exista
 // ========================
-const imagensDir = path.join(__dirname, '../imagens'); // ../imagens a partir de src/
+const imagensDir = path.join(__dirname, '../../imagens'); // ../imagens a partir de src/
 if (!fs.existsSync(imagensDir)) {
   fs.mkdirSync(imagensDir, { recursive: true });
 }
