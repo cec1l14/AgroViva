@@ -109,7 +109,7 @@ router.post('/produtor', async (req, res) => {
     const novoProdutor = await prisma.produtor.create({ data: parsed });
 
     // Enviar e-mail de boas-vindas após cadastro
-   await SendMail.createNewUser(novoProdutor.id);
+   await SendMail.createNewUser(novoProdutor.email);
 
     res.status(201).json({ message: 'Produtor cadastrado com sucesso', produtor: novoProdutor });
   } catch (error) {
@@ -142,7 +142,7 @@ router.post('/empresario', async (req, res) => {
     const novoEmpresario = await prisma.empresario.create({ data: parsed });
 
     // Enviar e-mail de boas-vindas após cadastro
-    await SendMail.createNewUser(novoEmpresario.id);
+    await SendMail.createNewUser(novoEmpresario.email);
 
     res.status(201).json({ message: 'Empresário cadastrado com sucesso', empresario: novoEmpresario });
   } catch (error) {

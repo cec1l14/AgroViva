@@ -4,14 +4,17 @@ import { PrismaClient } from '../generated/prisma/client.js';
 
 const prisma = new PrismaClient();
 
-async function createNewUser(id) {
+// -----------------------------------------
+// ENVIO DE EMAIL PARA NOVO USUÁRIO (PELO EMAIL)
+// -----------------------------------------
+async function createNewUser(email) {
   try {
     // Tenta como produtor
-    let user = await prisma.produtor.findUnique({ where: { id } });
+    let user = await prisma.produtor.findUnique({ where: { email } });
 
     // Se não for produtor, tenta como empresário
     if (!user) {
-      user = await prisma.empresario.findUnique({ where: { id } });
+      user = await prisma.empresario.findUnique({ where: { email } });
     }
 
     if (!user) {
@@ -22,7 +25,7 @@ async function createNewUser(id) {
     const transporter = nodemailer.createTransport(config);
 
     const info = await transporter.sendMail({
-      from: 'ASgroViva@email.com',
+      from: 'AgroViva@email.com',
       to: user.email,
       subject: 'Conta criada no AgroViva',
       html: `<h2>Conta criada com sucesso!</h2>`,
@@ -34,6 +37,10 @@ async function createNewUser(id) {
   }
 }
 
+// -----------------------------------------
+// ENVIO DE EMAIL PARA NOVO PRODUTO
+// (continua funcionando por id do produtor)
+// -----------------------------------------
 async function createNewProduct(produto) {
   try {
     // Busca o produtor correto
@@ -47,7 +54,7 @@ async function createNewProduct(produto) {
     const transporter = nodemailer.createTransport(config);
 
     const info = await transporter.sendMail({
-      from: 'noreply@email.com',
+      from: 'AgroViva@email.com',
       to,
       subject: 'Novo produto cadastrado no AgroViva',
       html: `
