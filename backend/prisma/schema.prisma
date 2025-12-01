@@ -15,6 +15,7 @@ model produtor {
   telefone String
   senha    String
   cpf      String   @unique
+  foto     String?
   produtos produto[]
 }
 
@@ -24,6 +25,7 @@ model Empresario {
   email    String  @unique
   senha    String
   telefone String 
+  foto     String?
   cnpj     String  @unique
 }
 

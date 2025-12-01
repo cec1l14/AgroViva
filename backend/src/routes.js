@@ -191,6 +191,86 @@ router.post('/produtos', isAuthenticated, upload.single('imagem'), async (req, r
     res.status(500).json({ errors: [{ field: null, message: 'Erro interno ao cadastrar produto' }] });
   }
 });
+router.post('/perfil', isAuthenticated, upload.single('foto'), async (req, res) => {
+  try {
+    const userId = req.userId; // vem do middleware
+
+    if (!req.file) {
+      return res.status(400).json({ error: 'Nenhuma imagem enviada' });
+    }
+
+    if (!req.file.mimetype.startsWith('image/')) {
+      return res.status(400).json({ error: 'Arquivo enviado não é uma imagem' });
+    }
+
+    const nomeArquivo = req.file.filename;
+    let usuarioAtualizado;
+
+    // Descobrir se é produtor ou empresario antes de atualizar
+    let usuario = await prisma.produtor.findUnique({ where: { id: userId } });
+    let tipo = 'produtor';
+
+    if (!usuario) {
+      usuario = await prisma.Empresario.findUnique({ where: { id: userId } });
+      tipo = 'empresario';
+    }
+
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+
+    // Atualizar foto
+    if (tipo === 'produtor') {
+      usuarioAtualizado = await prisma.produtor.update({
+        where: { id: userId },
+        data: { foto: nomeArquivo },
+      });
+    } else if (tipo === 'empresario') {
+      usuarioAtualizado = await prisma.Empresario.update({
+        where: { id: userId },
+        data: { foto: nomeArquivo },
+      });
+    }
+
+    // Remove senha antes de enviar
+    if (usuarioAtualizado.senha) delete usuarioAtualizado.senha;
+
+    res.json({
+      message: 'Foto de perfil atualizada com sucesso',
+      usuario: usuarioAtualizado,
+    });
+
+  } catch (error) {
+    console.error('Erro ao atualizar foto de perfil:', error);
+    res.status(500).json({ error: 'Erro interno ao atualizar foto de perfil' });
+  }
+});
+
+router.get('/perfil', isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.userId; // usa o que já existe no middleware
+    let usuario;
+
+    // Primeiro tenta achar como produtor
+    usuario = await prisma.produtor.findUnique({ where: { id: userId } });
+
+    // Se não for produtor, tenta como empresário
+    if (!usuario) {
+      usuario = await prisma.Empresario.findUnique({ where: { id: userId } });
+    }
+
+    if (!usuario) return res.status(404).json({ error: 'Usuário não encontrado' });
+
+    // Remove senha antes de enviar
+    if (usuario.senha) delete usuario.senha;
+
+    res.json(usuario);
+  } catch (error) {
+    console.error('Erro ao buscar perfil:', error);
+    res.status(500).json({ error: 'Erro interno ao buscar perfil' });
+  }
+});
+
 
 // ========================
 // 404 e tratamento global
