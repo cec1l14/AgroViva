@@ -1,33 +1,54 @@
 import nodemailer from 'nodemailer';
 import mailConfig from '../config/mail.js';
+import { PrismaClient } from '../generated/prisma/client.js';
 
-async function createNewUser(to) {
+const prisma = new PrismaClient();
+
+async function createNewUser(id) {
   try {
+    // Tenta como produtor
+    let user = await prisma.produtor.findUnique({ where: { id } });
+
+    // Se não for produtor, tenta como empresário
+    if (!user) {
+      user = await prisma.empresario.findUnique({ where: { id } });
+    }
+
+    if (!user) {
+      throw new Error('Usuário não encontrado');
+    }
+
+    const config = await mailConfig();
+    const transporter = nodemailer.createTransport(config);
+
+    const info = await transporter.sendMail({
+      from: 'noreply@email.com',
+      to: user.email,
+      subject: 'Conta criada no AgroViva',
+      html: `<h2>Conta criada com sucesso!</h2>`,
+    });
+
+    console.log(`Email enviado: ${nodemailer.getTestMessageUrl(info)}`);
+  } catch (err) {
+    console.error('Erro ao enviar email:', err);
+  }
+}
+
+async function createNewProduct(produto) {
+  try {
+    // Busca o produtor correto
+    const produtor = await prisma.produtor.findUnique({
+      where: { id: produto.cod_produtor },
+    });
+
+    const to = produtor?.email || 'admin@empresa.com';
+
     const config = await mailConfig();
     const transporter = nodemailer.createTransport(config);
 
     const info = await transporter.sendMail({
       from: 'noreply@email.com',
       to,
-      subject: 'Conta criada no AgroViva',
-      html: `<h2>Conta criada com sucesso!</h2>`,
-    });
-
-    console.log(`Email enviado para ${to}: ${nodemailer.getTestMessageUrl(info)}`);
-  } catch (err) {
-    console.error('Erro ao enviar email:', err);
-    throw new Error(err);
-  }
-}
-
-async function createNewProduct(produto) {
-  try {
-    const config = await mailConfig();
-    const transporter = nodemailer.createTransport(config);
-
-    const info = await transporter.sendMail({
-      from: 'noreply@email.com',
-      to: 'seu-email@empresa.com',  // Altere para o e-mail que você quer receber a notificação
       subject: 'Novo produto cadastrado no AgroViva',
       html: `
         <h2>Novo produto cadastrado:</h2>
@@ -38,10 +59,9 @@ async function createNewProduct(produto) {
       `,
     });
 
-    console.log(`Email enviado sobre novo produto: ${nodemailer.getTestMessageUrl(info)}`);
+    console.log(`Email enviado: ${nodemailer.getTestMessageUrl(info)}`);
   } catch (err) {
     console.error('Erro ao enviar email de novo produto:', err);
-    throw new Error('Erro ao enviar e-mail de novo produto.');
   }
 }
 
