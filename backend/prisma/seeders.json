@@ -1,7 +1,6 @@
 {
   "produtor": [
     {
-      "id": 1,
       "email": "produtor1@agroviva.com",
       "telefone": "11999999999",
       "nome": "Patricio",
@@ -11,16 +10,15 @@
   ],
   "empresario": [
     {
-      "id": 1,
       "email": "empresario1@agroviva.com",
       "senha": "senha123",
       "cnpj": "12345678000199",
-      "nome": "Empresario Exemplo"
+      "nome": "Empresario Exemplo",
+      "telefone":"8999899999999"
     }
   ],
   "produtos": [
     {
-      "id": 1,
       "descricao": "Abacaxi",
       "tipo": "Fruta",
       "imagem": "../imagens/abacaxi.jpg",
@@ -29,7 +27,6 @@
       "cod_produtor": 1
     },
     {
-      "id": 2,
       "descricao": "Alho",
       "tipo": "Legume",
       "imagem": "../imagens/alho.jpg",
@@ -38,7 +35,6 @@
       "cod_produtor": 1
     },
     {
-      "id": 3,
       "descricao": "Arroz",
       "tipo": "Grão",
       "imagem": "../imagens/arrozin.jpg",

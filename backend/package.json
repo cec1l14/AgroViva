@@ -9,18 +9,17 @@
     "db:drop": "rm src/database/db.sqlite"
   },
   "prisma": {
-    "seed": "node seed.js"
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
-    "@prisma/client": "^6.15.0",
+    "@prisma/client": "^5.22.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
+    "prisma": "^5.22.0",
     "zod": "^4.1.12"
-  },
-  "devDependencies": {
-    "prisma": "^6.17.1"
   }
 }

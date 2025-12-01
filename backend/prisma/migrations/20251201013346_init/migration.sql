@@ -9,11 +9,12 @@ CREATE TABLE "produtor" (
 );
 
 -- CreateTable
-CREATE TABLE "empresario" (
+CREATE TABLE "Empresario" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "nome" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
+    "telefone" TEXT NOT NULL,
     "cnpj" TEXT NOT NULL
 );
 
@@ -36,7 +37,7 @@ CREATE UNIQUE INDEX "produtor_email_key" ON "produtor"("email");
 CREATE UNIQUE INDEX "produtor_cpf_key" ON "produtor"("cpf");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "empresario_email_key" ON "empresario"("email");
+CREATE UNIQUE INDEX "Empresario_email_key" ON "Empresario"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "empresario_cnpj_key" ON "empresario"("cnpj");
+CREATE UNIQUE INDEX "Empresario_cnpj_key" ON "Empresario"("cnpj");
