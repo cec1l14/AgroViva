@@ -7,6 +7,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import SendMail from './services/SendMail.js'; // Importando o serviço de e-mail
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -106,6 +107,10 @@ router.post('/produtor', async (req, res) => {
   try {
     const parsed = schema.parse(req.body);
     const novoProdutor = await prisma.produtor.create({ data: parsed });
+
+    // Enviar e-mail de boas-vindas após cadastro
+    await SendMail.createNewUser(novoProdutor.email);
+
     res.status(201).json({ message: 'Produtor cadastrado com sucesso', produtor: novoProdutor });
   } catch (error) {
     console.error('Erro ao cadastrar produtor:', error);
@@ -135,6 +140,10 @@ router.post('/empresario', async (req, res) => {
   try {
     const parsed = schema.parse(req.body);
     const novoEmpresario = await prisma.empresario.create({ data: parsed });
+
+    // Enviar e-mail de boas-vindas após cadastro
+    await SendMail.createNewUser(novoEmpresario.email);
+
     res.status(201).json({ message: 'Empresário cadastrado com sucesso', empresario: novoEmpresario });
   } catch (error) {
     console.error('Erro ao cadastrar empresário:', error);
@@ -185,12 +194,19 @@ router.post('/produtos', isAuthenticated, upload.single('imagem'), async (req, r
       },
     });
 
+    // Enviar e-mail de notificação de novo produto
+    await SendMail.createNewProduct(novoProduto);
+
     res.status(201).json(novoProduto);
   } catch (error) {
     console.error('Erro ao cadastrar produto:', error);
     res.status(500).json({ errors: [{ field: null, message: 'Erro interno ao cadastrar produto' }] });
   }
 });
+
+// ========================
+// ATUALIZAR FOTO DE PERFIL
+// ========================
 router.post('/perfil', isAuthenticated, upload.single('foto'), async (req, res) => {
   try {
     const userId = req.userId; // vem do middleware
@@ -245,7 +261,6 @@ router.post('/perfil', isAuthenticated, upload.single('foto'), async (req, res) 
     res.status(500).json({ error: 'Erro interno ao atualizar foto de perfil' });
   }
 });
-
 router.get('/perfil', isAuthenticated, async (req, res) => {
   try {
     const userId = req.userId; // usa o que já existe no middleware
@@ -259,10 +274,14 @@ router.get('/perfil', isAuthenticated, async (req, res) => {
       usuario = await prisma.Empresario.findUnique({ where: { id: userId } });
     }
 
-    if (!usuario) return res.status(404).json({ error: 'Usuário não encontrado' });
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
 
     // Remove senha antes de enviar
-    if (usuario.senha) delete usuario.senha;
+    if (usuario.senha) {
+      delete usuario.senha;
+    }
 
     res.json(usuario);
   } catch (error) {
@@ -270,8 +289,6 @@ router.get('/perfil', isAuthenticated, async (req, res) => {
     res.status(500).json({ error: 'Erro interno ao buscar perfil' });
   }
 });
-
-
 // ========================
 // 404 e tratamento global
 // ========================
