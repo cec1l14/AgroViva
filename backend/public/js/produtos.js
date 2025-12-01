@@ -5,7 +5,9 @@ let produtos = []; // Lista de produtos
 
 console.log("Script produtos.js carregado");
 
-// ✅ Verifica token JWT
+// ========================
+// 🔐 Verifica token JWT
+// ========================
 const token = localStorage.getItem('token');
 console.log("Token JWT do localStorage:", token);
 
@@ -14,7 +16,9 @@ if (!token) {
     window.location.href = 'login.html';
 }
 
-// ✅ Logout
+// ========================
+// 🚪 Logout
+// ========================
 document.querySelectorAll('.sub-menu-link').forEach(link => {
     if (link.querySelector('p')?.textContent === 'Sair') {
         link.addEventListener('click', (e) => {
@@ -26,7 +30,46 @@ document.querySelectorAll('.sub-menu-link').forEach(link => {
     }
 });
 
-// Função para renderizar produtos na tela
+// ========================
+// 🧑 Carregar dados do perfil do usuário
+// ========================
+async function carregarPerfil() {
+    try {
+        const response = await fetch('/api/perfil', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error("Erro ao carregar perfil");
+
+        const user = await response.json();
+        console.log("Perfil carregado:", user);
+
+        // Nome no submenu
+        const nomeEl = document.querySelector(".user-info h2");
+        if (nomeEl) nomeEl.textContent = user.nome;
+
+        // Foto no submenu
+        const imgMenu = document.querySelector(".user-info img");
+        if (imgMenu) {
+            imgMenu.src = user.foto ? `/imagens/${user.foto}` : "../../imagens/cara.png";
+        }
+
+        // Foto do menu superior
+        const imgTop = document.querySelector(".user-pic");
+        if (imgTop) {
+            imgTop.src = user.foto ? `/imagens/${user.foto}` : "../../imagens/cara.png";
+        }
+
+    } catch (error) {
+        console.error("Erro ao carregar perfil:", error);
+    }
+}
+
+// ========================
+// 🛒 Função para renderizar produtos
+// ========================
 function renderizarProdutos(lista) {
     container.innerHTML = ''; // Limpa o container
 
@@ -54,7 +97,9 @@ function renderizarProdutos(lista) {
     });
 }
 
-// Filtrar produtos por tipo
+// ========================
+// 🔎 Filtrar produtos por tipo
+// ========================
 function filtrarProdutos(tipo) {
     if (tipo === "Todos") {
         renderizarProdutos(produtos);
@@ -64,7 +109,6 @@ function filtrarProdutos(tipo) {
     }
 }
 
-// Configurar filtros
 function configurarFiltros() {
     botoesFiltro.forEach(botao => {
         botao.addEventListener('click', () => {
@@ -74,7 +118,9 @@ function configurarFiltros() {
     });
 }
 
-// Clique no ícone do produtor
+// ========================
+// 👤 Clique no ícone do produtor
+// ========================
 container.addEventListener('click', function (event) {
     if (event.target.classList.contains('perfil-icon')) {
         const produtorId = event.target.dataset.produtor;
@@ -82,7 +128,9 @@ container.addEventListener('click', function (event) {
     }
 });
 
-// ✅ Carregar produtos da API com JWT e debug
+// ========================
+// 📦 Carregar produtos da API
+// ========================
 async function carregarProdutos() {
     console.log("Carregando produtos da API...");
 
@@ -108,6 +156,9 @@ async function carregarProdutos() {
     }
 }
 
-// Inicialização
+// ========================
+// 🚀 Inicialização
+// ========================
+carregarPerfil();  // <--- Agora carrega nome + foto
 carregarProdutos();
 configurarFiltros();
