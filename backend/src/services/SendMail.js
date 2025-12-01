@@ -22,7 +22,7 @@ async function createNewUser(id) {
     const transporter = nodemailer.createTransport(config);
 
     const info = await transporter.sendMail({
-      from: 'noreply@email.com',
+      from: 'ASgroViva@email.com',
       to: user.email,
       subject: 'Conta criada no AgroViva',
       html: `<h2>Conta criada com sucesso!</h2>`,
