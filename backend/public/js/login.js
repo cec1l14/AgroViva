@@ -1,11 +1,4 @@
 const form = document.getElementById('formLogin');
-
-// Verifica se já há um usuário logado
-const usuarioExistente = localStorage.getItem('usuarioLogado');
-if (usuarioExistente) {
-    window.location.href = 'home.html';
-}
-
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
