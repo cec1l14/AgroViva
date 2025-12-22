@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import { PrismaClient } from './generated/prisma/client.js';
+import prisma from './database/prisma.js';
 import { z } from 'zod';
 import { isAuthenticated } from './middleware/autentico.js';
 import multer from 'multer';
@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const router = express.Router();
-const prisma = new PrismaClient();
+
 
 // ========================
 // Garantir que a pasta de imagens exista
