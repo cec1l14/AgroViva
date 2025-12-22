@@ -1,4 +1,4 @@
-import '../config/env.js'; // 🔥 GARANTE ENV ANTES DE TUDO
+import '../config/env.js'; //importação do env para evitar problemas
 import { PrismaClient } from '../generated/prisma/client.js';
 
 const prisma = new PrismaClient();
