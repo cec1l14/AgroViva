@@ -6,7 +6,9 @@
     "dev": "node --watch index.js",
     "db:reload": "npm run db:drop && npm run db:load",
     "db:load": "node src/database/load.js",
-    "db:drop": "rm src/database/db.sqlite"
+    "db:drop": "rm src/database/db.sqlite",
+  "test:route": "node --test tests/teste.route.spec.js",
+  "test:e2e": "npx playwright test tests/teste.e2e.spec.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
